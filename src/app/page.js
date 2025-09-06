@@ -223,7 +223,7 @@ const DJLandingPage = () => {
     >
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-40">
         <motion.img 
-          src="/images/logo.png" 
+          src="/images/logo.webp" 
           alt="DJ Logo" 
           className="h-16 md:h-24 w-auto"
           initial={{ opacity: 0, y: -20 }}
@@ -285,7 +285,7 @@ const DJLandingPage = () => {
             className="relative"
           >
             <img 
-              src="/assets/dj-console-pc.jpg" 
+              src="/assets/dj-console-pc.webp" 
               alt="DJ Services" 
               className="w-full rounded-lg shadow-2xl"
             />
@@ -333,17 +333,17 @@ const DJLandingPage = () => {
           {[
             {
               title: "Weddings",
-              image: "/assets/better.png",
+              image: "/assets/better.webp",
               description: "Create the perfect atmosphere for your special day with a customized music selection."
             },
             {
               title: "Corporate Events",
-              image: "/assets/corporate.png",
+              image: "/assets/corporate.webp",
               description: "Professional entertainment for company parties, conferences, and team-building events."
             },
             {
               title: "Private Parties",
-              image: "/assets/quince.jpeg",
+              image: "/assets/quince.webp",
               description: "Birthdays, anniversaries, or any celebration that deserves great music."
             }
           ].map((service, index) => (
@@ -493,7 +493,7 @@ const DJLandingPage = () => {
             className="relative"
           >
             <img 
-              src="/assets/about.jpeg" 
+              src="/assets/about.webp" 
               alt="DJLOW323 Setup" 
               className="w-full rounded-lg shadow-2xl"
             />
@@ -523,14 +523,14 @@ const DJLandingPage = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { src: '/assets/quince.jpeg', title: 'Quinceañera' },
-            { src: '/assets/reveal.png', title: 'Gender Reveal' },
-            { src: '/assets/better.png', title: 'Private Event' },
-            { src: '/assets/console-dj.jpg', title: 'Professional Setup' },
-            { src: '/assets/dj-console-pc.jpg', title: 'Studio Setup' },
-            { src: '/assets/setup2.jpeg', title: 'Equipment' },
-            { src: '/assets/1.png', title: 'DJLOW323' },
-            { src: '/assets/dj-low-cover-logo-h.png', title: 'Brand' }
+            { src: '/assets/quince.webp', title: 'Quinceañera' },
+            { src: '/assets/reveal.webp', title: 'Gender Reveal' },
+            { src: '/assets/better.webp', title: 'Private Event' },
+            { src: '/assets/console-dj.webp', title: 'Professional Setup' },
+            { src: '/assets/dj-console-pc.webp', title: 'Studio Setup' },
+            { src: '/assets/setup2.webp', title: 'Equipment' },
+            { src: '/assets/1.webp', title: 'DJLOW323' },
+            { src: '/assets/dj-low-cover-logo-h.webp', title: 'Brand' }
           ].map((image, index) => (
             <motion.div
               key={index}
@@ -666,10 +666,9 @@ const DJLandingPage = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
           <div>
-            <img src="/images/logo.png" alt="DJLOW323" className="h-16 mx-auto md:mx-0 mb-4" />
+            <img src="/images/logo.webp" alt="DJLOW323" className="h-16 mx-auto md:mx-0 mb-4" />
             <p className="text-[#b2a9aa] text-sm">
-              DJ • 98.1 FM FiestaMix<br />
-              Las Vegas, Nevada
+              DJ • Las Vegas, Nevada
             </p>
           </div>
           
