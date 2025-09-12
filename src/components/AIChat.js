@@ -66,20 +66,23 @@ const AIChat = ({ fullPage = false, formData = null, onFormDataChange = null }) 
     setIsTyping(false);
   };
 
+  const hasInitializedRef = useRef(false);
+
   const startChat = async () => {
+    if (hasInitializedRef.current || !fullPage) return; // Prevent multiple initializations
+    
+    hasInitializedRef.current = true;
     setIsOpen(true);
     setShowWelcome(false);
     setMessages([]);
     
-    if (fullPage && messages.length === 0) {
-      await simulateTyping();
-      addMessage("Hello! I'm DJLOW323's virtual assistant. I'll help you get a personalized quote for your event. What type of event are you planning?", 'ai');
-      setCurrentStep('eventType');
-    }
+    await simulateTyping();
+    addMessage("Hello! I'm DJLOW323's virtual assistant. I'll help you get a personalized quote for your event. What type of event are you planning?", 'ai');
+    setCurrentStep('eventType');
   };
 
   useEffect(() => {
-    if (fullPage && messages.length === 0) {
+    if (fullPage && !hasInitializedRef.current) {
       startChat();
     }
   }, [fullPage]);
