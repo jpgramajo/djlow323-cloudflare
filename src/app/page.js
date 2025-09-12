@@ -3,11 +3,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SocialIcon } from 'react-social-icons';
+import { useRouter } from 'next/navigation';
 import '@fontsource/archivo-black';
 import '@fontsource/syncopate';
 import '@fontsource/roboto';
+import AIChat from '../components/AIChat';
+import Footer from '../components/Footer';
 
 const DJLandingPage = () => {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState('HOME');
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
@@ -46,7 +50,6 @@ const DJLandingPage = () => {
   ];
 
   const socialLinks = [
-    { url: 'https://soundcloud.com/djlow323', platform: 'soundcloud' },
     { url: 'https://www.tiktok.com/@djlow323', platform: 'tiktok' },
     { url: 'https://open.spotify.com/user/djlow323', platform: 'spotify' },
     { url: 'https://www.facebook.com/DjLow.LasVegas', platform: 'facebook' },
@@ -61,7 +64,7 @@ const DJLandingPage = () => {
     "Birthday Party",
     "Corporate Event",
     "Quinceañera",
-    "Club Night",
+    "Night Club",
     "Private Party",
     "Festival",
     "Other"
@@ -244,16 +247,8 @@ const DJLandingPage = () => {
         Your browser does not support HTML5 video.
       </video>
 
-      
-
       {!isVideoLoaded && (
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            className="w-8 h-8 border-2 border-[#fe9511] border-t-transparent rounded-full"
-          />
-        </div>
+        <img className='absolute top-0 left-0 w-full h-full object-cover' src='/images/main-image.webp'></img>
       )}
     </section>
   );
@@ -386,7 +381,7 @@ const DJLandingPage = () => {
       >
         <h2 className="text-4xl md:text-6xl font-bold text-center text-[#fe9511] mb-16"
             style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-          PLANS & PRICING
+          PLANS
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -409,7 +404,6 @@ const DJLandingPage = () => {
               <h3 className="text-2xl font-bold text-[#fe9511] mb-2" style={{ fontFamily: 'Syncopate, sans-serif' }}>
                 {pkg.name}
               </h3>
-              <p className="text-3xl font-bold text-white mb-2">{pkg.price}</p>
               <p className="text-[#b2a9aa] mb-6">{pkg.duration}</p>
               <ul className="space-y-3">
                 {pkg.features.map((feature, idx) => (
@@ -420,11 +414,11 @@ const DJLandingPage = () => {
                 ))}
               </ul>
               <button 
-                onClick={() => setShowBookingForm(true)}
+                onClick={() => router.push('/quote?mode=form')}
                 className="w-full bg-[#fe9511] text-black py-3 rounded font-bold mt-6 hover:bg-[#fe9511]/90 transition-colors"
                 style={{ fontFamily: 'Archivo Black, sans-serif' }}
               >
-                BOOK NOW
+                GET A QUOTE
               </button>
             </motion.div>
           ))}
@@ -624,8 +618,8 @@ const DJLandingPage = () => {
               Get In Touch
             </h3>
             <p className="text-[#b2a9aa] mb-6">
-              Email: <a href="mailto:contact@djlow323.com" className="text-[#fe9511] hover:underline">
-                contact@djlow323.com
+              Email: <a href="mailto:info@djlow323.com" className="text-[#fe9511] hover:underline">
+                info@djlow323.com
               </a>
             </p>
             <p className="text-[#b2a9aa] mb-8">Las Vegas, Nevada, United States</p>
@@ -659,58 +653,6 @@ const DJLandingPage = () => {
     </section>
   );
 
-  const renderFooter = () => {
-  const currentYear = new Date().getFullYear(); // Obtenemos el año actual
-  return (
-    <footer className="bg-black border-t border-[#b2a9aa]/20 py-12 px-6 mb-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
-          <div>
-            <img src="/images/logo.webp" alt="DJLOW323" className="h-16 mx-auto md:mx-0 mb-4" />
-            <p className="text-[#b2a9aa] text-sm">
-              DJ • Las Vegas, Nevada
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="text-white font-bold mb-4" style={{ fontFamily: 'Syncopate, sans-serif' }}>
-              Quick Links
-            </h4>
-            <div className="space-y-2">
-              {menuItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
-                  className="block text-[#b2a9aa] hover:text-[#fe9511] transition-colors duration-300 text-sm"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-4" style={{ fontFamily: 'Syncopate, sans-serif' }}>
-              Contact
-            </h4>
-            <p className="text-[#b2a9aa] text-sm mb-2">
-              <a href="mailto:contact@djlow323.com" className="hover:text-[#fe9511]">
-                contact@djlow323.com
-              </a>
-            </p>
-            <p className="text-[#b2a9aa] text-sm">For Bookings & Events</p>
-          </div>
-        </div>
-
-        <div className="border-t border-[#b2a9aa]/20 mt-8 pt-8 text-center">
-          <p className="text-[#b2a9aa] text-sm">
-            © {currentYear} DJLOW323. All rights reserved. | Las Vegas, Nevada
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
 
 
   return (
@@ -733,7 +675,7 @@ const DJLandingPage = () => {
             >
               <h2 className="text-2xl font-bold text-[#fe9511] mb-6 text-center"
                   style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-                BOOK YOUR EVENT
+                GET A QUOTE
               </h2>
 
               <form onSubmit={handleBookingSubmit} className="space-y-4">
@@ -854,7 +796,7 @@ const DJLandingPage = () => {
       {renderGallerySection()}
       {renderFAQSection()}
       {renderContactSection()}
-      {renderFooter()}
+      <Footer scrollToSection={scrollToSection} menuItems={menuItems} />
 
       {/* Navigation Bar - Desktop */}
       {!isMobile && (
@@ -893,13 +835,13 @@ const DJLandingPage = () => {
             </div>
 
             <motion.button
-              onClick={() => setShowBookingForm(true)}
+              onClick={() => router.push('/quote?mode=form')}
               className="bg-[#fe9511] text-black px-6 py-2 font-bold text-sm rounded hover:bg-[#fe9511]/90 transition-colors duration-300"
               style={{ fontFamily: 'Archivo Black, sans-serif' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              BOOK YOUR EVENT
+              GET A QUOTE
             </motion.button>
           </div>
         </motion.div>
@@ -961,13 +903,13 @@ const DJLandingPage = () => {
             </div>
 
             <motion.button
-              onClick={() => setShowBookingForm(true)}
+              onClick={() => router.push('/quote?mode=form')}
               className="bg-[#fe9511] text-black px-3 py-1.5 font-bold text-xs rounded hover:bg-[#fe9511]/90 transition-colors duration-300 ml-4"
               style={{ fontFamily: 'Archivo Black, sans-serif' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              BOOK
+              GET A QUOTE
             </motion.button>
           </div>
         </motion.div>
@@ -992,6 +934,9 @@ const DJLandingPage = () => {
           </motion.div>
         </motion.div>
       )}
+
+      {/* AI Chat Component */}
+      <AIChat />
     </div>
   );
 };
