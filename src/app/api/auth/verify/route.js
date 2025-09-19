@@ -85,14 +85,9 @@ export async function POST(req) {
         { expiresIn: '7d' }
     );
 
-    const isSecure = env.DEV_MODE === '1' ? false : true;
-
     const cookieString = env.DEV_MODE === '1'
         ? `auth_token=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=604800`
         : `auth_token=${token}; HttpOnly; SameSite=Lax; Secure=true; Path=/; Max-Age=604800`;
-
-    console.log('DEV_MODE:', env.DEV_MODE, 'isSecure:', isSecure);
-    console.log('Setting cookie:', cookieString);
 
     const response = new Response(JSON.stringify({
         message: 'Authentication successful',

@@ -4,11 +4,8 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 export async function GET(req) {
     const { env } = await getCloudflareContext();
 
-    console.log(req.headers)
-
     const cookieHeader = req.headers.get('cookie');
     if (!cookieHeader) {
-        console.log('AUTH STATUS FAIL: No cookie header found');
         return new Response(JSON.stringify({
             message: 'ERROR: No authentication cookie found. Please allow cookies.'
         }), {
@@ -24,11 +21,8 @@ export async function GET(req) {
         })
     );
 
-    console.log(cookies)
-
     const authToken = cookies.auth_token;
     if (!authToken) {
-        console.log('AUTH STATUS FAIL: No auth_token cookie found');
         return new Response(JSON.stringify({
             message: 'ERROR: Authentication cookie not found'
         }), {
@@ -40,7 +34,6 @@ export async function GET(req) {
     try {
         const decoded = jwt.decode(authToken, { complete: true });
         if (!decoded) {
-            console.log('AUTH STATUS FAIL: Invalid token format');
             return new Response(JSON.stringify({
                 message: 'ERROR: Invalid format for token'
             }), {
@@ -54,7 +47,6 @@ export async function GET(req) {
         ).bind(decoded.payload.uuid).first();
 
         if (!user) {
-            console.log('AUTH STATUS FAIL: User not found for UUID:', decoded.payload.uuid);
             return new Response(JSON.stringify({
                 message: 'ERROR: Invalid sesion'
             }), {
@@ -74,7 +66,6 @@ export async function GET(req) {
         });
 
     } catch (error) {
-        console.log('AUTH STATUS FAIL: JWT verification error:', error.message);
         return new Response(JSON.stringify({
             message: 'ERROR: Invalid or expired token'
         }), {
