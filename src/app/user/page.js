@@ -1,76 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import '@fontsource/archivo-black';
 import '@fontsource/syncopate';
-import '@fontsource/roboto';
 
 const DashboardPage = () => {
-  const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState(false);
-
-  useEffect(() => {
-    const authValue = sessionStorage.getItem('auth');
-    if (authValue !== '1') {
-      router.push('/auth');
-      return;
-    }
-    setIsAuthorized(true);
-  }, [router]);
-
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      sessionStorage.removeItem('auth');
-      router.push('/');
-    }
-  };
-
-  if (!isAuthorized) {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen bg-black">
-      {/* Header */}
-      <div className="bg-black border-b border-[#b2a9aa]/20 py-6 px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <img src="/images/logo.webp" alt="DJLOW323" className="h-12 w-auto" />
-            <h1 className="text-2xl font-bold text-[#fe9511]" style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-              DASHBOARD
-            </h1>
-          </div>
-          
-          <button
-            onClick={handleLogout}
-            className="bg-[#b2a9aa]/20 hover:bg-red-500/20 border border-[#b2a9aa]/20 hover:border-red-500/20 text-[#b2a9aa] hover:text-red-400 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300"
-            style={{ fontFamily: 'Syncopate, sans-serif' }}
-          >
-            LOGOUT
-          </button>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto p-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center"
+    >
           <div className="bg-[#1a1a1a] border border-[#fe9511]/20 rounded-lg p-12 mb-8">
             <div className="bg-[#fe9511] rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
               <svg className="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,9 +88,7 @@ const DashboardPage = () => {
               This dashboard is currently being built. More features and functionality will be added soon!
             </p>
           </motion.div>
-        </motion.div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
