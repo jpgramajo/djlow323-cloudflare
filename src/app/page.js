@@ -27,6 +27,7 @@ const DJLandingPage = () => {
   const [currentMobileIndex, setCurrentMobileIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Estado para controlar menú móvil
   const [bookingForm, setBookingForm] = useState({
     firstName: '',
     lastName: '',
@@ -126,6 +127,7 @@ const DJLandingPage = () => {
         block: 'start'
       });
     }
+    setIsMobileMenuOpen(false); // Cerrar menú móvil después de hacer clic
   };
 
   const handleMobileNavigation = (direction) => {
@@ -306,16 +308,29 @@ const DJLandingPage = () => {
 
       <Footer scrollToSection={scrollToSection} menuItems={menuItems} />
 
-      {/* Navigation Bar - Desktop */}
-      {!isMobile && (
-        <motion.div
-          className="fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-sm border-t border-[#b2a9aa]/20 z-50"
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <div className="flex items-center justify-between px-6 py-4">
-            <div className="flex space-x-8">
+      {/* Top Navigation Bar - Glassmorphism Effect */}
+      <motion.nav 
+        className="fixed top-4 left-4 right-4 z-50 bg-black/20 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
+        <div className="flex items-center justify-between px-6 py-3">
+          {/* Logo */}
+          <div className="flex items-center">
+            <motion.img
+              src="/images/logo.webp"
+              alt="DJ Logo"
+              className="h-10 md:h-10 w-auto"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+          </div>
+
+          {/* Desktop Navigation */}
+          {!isMobile && (
+            <div className="flex items-center space-x-8">
               {menuItems.map((item) => (
                 <button
                   key={item}
@@ -328,10 +343,9 @@ const DJLandingPage = () => {
                   style={{ fontFamily: 'Syncopate, sans-serif' }}
                 >
                   {item}
-
                   {activeSection === item && (
                     <motion.div
-                      className="absolute -bottom-6 left-0 w-full h-1 bg-[#fe9511]"
+                      className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#fe9511] rounded-full"
                       layoutId="activeBar"
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
@@ -340,22 +354,104 @@ const DJLandingPage = () => {
                   )}
                 </button>
               ))}
+              
+              {/* User Icon for Login */}
+              <button 
+                className="text-[#b2a9aa] hover:text-[#fe9511] transition-colors"
+                onClick={() => router.push('/login')}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </button>
             </div>
+          )}
 
-            <motion.button
-              onClick={() => router.push('/quote?mode=form')}
-              className="bg-[#fe9511] text-black px-6 py-2 font-bold text-sm rounded hover:bg-[#fe9511]/90 transition-colors duration-300"
-              style={{ fontFamily: 'Archivo Black, sans-serif' }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {/* Mobile Menu Button */}
+          {isMobile && (
+            <button 
+              className="text-[#fe9511] p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              GET A QUOTE
-            </motion.button>
-          </div>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          )}
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobile && (
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bg-black/80 backdrop-blur-md rounded-b-2xl overflow-hidden"
+              >
+                <div className="px-6 py-4 space-y-4">
+                  {menuItems.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => scrollToSection(item)}
+                      className={`block w-full text-left font-semibold transition-colors duration-300 ${
+                        activeSection === item
+                          ? 'text-[#fe9511]'
+                          : 'text-[#b2a9aa] hover:text-white'
+                      }`}
+                      style={{ fontFamily: 'Syncopate, sans-serif' }}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                  
+                  {/* Login Option */}
+                  <button 
+                    className="block w-full text-left text-[#b2a9aa] hover:text-[#fe9511] font-semibold transition-colors duration-300"
+                    onClick={() => router.push('/login')}
+                    style={{ fontFamily: 'Syncopate, sans-serif' }}
+                  >
+                    LOGIN
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        )}
+      </motion.nav>
+
+      {/* Bottom Action Buttons with Glassmorphism - Only for Desktop */}
+      {!isMobile && (
+        <motion.div 
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex items-center gap-4 bg-black/20 backdrop-blur-md rounded-full p-2 border border-white/10 shadow-lg"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          <motion.button
+            onClick={() => setShowBookingForm(true)}
+            className="bg-[#fe9511] text-black px-6 py-3 font-bold text-sm rounded-full hover:bg-[#fe9511]/90 transition-colors duration-300 flex items-center gap-2"
+            style={{ fontFamily: 'Archivo Black, sans-serif' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            GET A QUOTE
+          </motion.button>
+
+          {/* AI Chat Button with Lightbulb Icon */}
+          <button className="bg-[#333] text-[#fe9511] p-3 rounded-full hover:bg-[#444] transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </button>
         </motion.div>
       )}
 
-      {/* Navigation Bar - Mobile */}
+      {/* Mobile Navigation Bar - Bottom (Existing) */}
       {isMobile && (
         <motion.div
           className="fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-sm border-t border-[#b2a9aa]/20 z-50"
@@ -411,7 +507,7 @@ const DJLandingPage = () => {
             </div>
 
             <motion.button
-              onClick={() => router.push('/quote?mode=form')}
+              onClick={() => setShowBookingForm(true)}
               className="bg-[#fe9511] text-black px-3 py-1.5 font-bold text-xs rounded hover:bg-[#fe9511]/90 transition-colors duration-300 ml-4"
               style={{ fontFamily: 'Archivo Black, sans-serif' }}
               whileHover={{ scale: 1.05 }}
@@ -443,8 +539,8 @@ const DJLandingPage = () => {
         </motion.div>
       )}
 
-      {/* AI Chat Component */}
-      <AIChat />
+      {/* AI Chat Component - Hidden on desktop as it's now in the bottom bar */}
+      {isMobile && <AIChat />}
     </div>
   );
 };
