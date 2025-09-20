@@ -43,7 +43,7 @@ const MixcloudSection = ({ sectionRef }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
                 <Headphones className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
-                <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">LIVE MIXES</span>
+                <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">MIXES</span>
               </div>
             </div>
           </motion.div>
@@ -146,80 +146,10 @@ const MixcloudSection = ({ sectionRef }) => {
         </motion.div>
 
         {/* Additional Info Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {[
-            {
-              icon: Music,
-              title: "Live Sessions",
-              description: "Experience live mixing sessions and exclusive tracks",
-              gradient: "from-orange-400/10 to-amber-400/10"
-            },
-            {
-              icon: Headphones,
-              title: "Premium Quality",
-              description: "High-quality audio for the ultimate listening experience",
-              gradient: "from-blue-400/10 to-cyan-400/10"
-            },
-            {
-              icon: Play,
-              title: "Latest Releases",
-              description: "Stay updated with the newest mixes and performances",
-              gradient: "from-violet-400/10 to-purple-400/10"
-            }
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative"
-            >
-              {/* Glow Effect */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-all duration-500`}></div>
-              
-              {/* Main Card */}
-              <div className="relative bg-white/[0.06] backdrop-blur-xl rounded-2xl border border-white/10 p-6 sm:p-8 hover:border-white/20 transition-all duration-500 group-hover:bg-white/[0.08] text-center">
-                {/* Glass Reflections */}
-                <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/[0.1] to-transparent rounded-t-2xl"></div>
-                <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-white/[0.05] to-transparent rounded-br-2xl"></div>
-                
-                <div className="relative">
-                  <div className="relative group/icon mb-4">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-xl blur-md group-hover/icon:blur-lg transition-all duration-300`}></div>
-                    <div className="relative w-12 h-12 mx-auto bg-white/[0.08] backdrop-blur-md rounded-xl border border-white/20 flex items-center justify-center group-hover/icon:scale-110 transition-all duration-300">
-                      <item.icon className="w-6 h-6 text-orange-400" />
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/60 text-sm font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mt-16 sm:mt-20 lg:mt-24"
-        >
-          <div className="relative inline-block group">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-amber-400/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-            <div className="relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white/[0.08] backdrop-blur-md rounded-full border border-white/20 hover:border-orange-400/40 transition-all duration-300">
-              <Music className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
-              <span className="text-sm sm:text-base text-white/90 font-medium">Follow for exclusive content and live sessions</span>
-            </div>
-          </div>
-        </motion.div>
+        
       </div>
     </section>
   );

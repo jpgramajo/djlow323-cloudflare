@@ -113,9 +113,7 @@ const AboutSection = ({ sectionRef }) => {
                     viewport={{ once: true }}
                     className="text-base sm:text-lg text-white/70 leading-relaxed font-light"
                   >
-                    I'm DJLOW, official DJ of <span className="text-orange-400 font-semibold">98.1 FM FiestaMix</span> in Las Vegas, Nevada. 
-                    With years of experience in the music industry, I've been part of Lo Maximo Production and previously 
-                    DJ at 99.3 FM LatinoMix.
+                    I'm <span className="text-orange-400 font-semibold">DJLOW</span>, a professional DJ based in Las Vegas, Nevada. With experience in the music industry since 2003, I've worked on a wide range of events, from radio promotions to large-scale celebrations, and across all music genres.
                   </motion.p>
                   
                   <motion.p
@@ -247,8 +245,8 @@ const AboutSection = ({ sectionRef }) => {
                         </div>
                       </div>
                       <div>
-                        <div className="text-white font-bold text-base sm:text-lg">DJLOW323</div>
-                        <div className="text-orange-400 text-sm font-medium">Professional DJ & Producer</div>
+                        <div className="text-white font-bold text-base sm:text-lg">DJLOW</div>
+                        <div className="text-orange-400 text-sm font-medium">Professional DJ</div>
                       </div>
                     </div>
                   </div>

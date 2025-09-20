@@ -190,7 +190,7 @@ const ServicesSection = ({ sectionRef }) => {
         {/* Modern Services Grid - Same layout, just responsive sizes */}
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => {
-            const images = ["/assets/better.webp", "/assets/corporate.webp", "/assets/quince.webp"];
+            const images = ["/assets/wedding.jpg", "/assets/corp.webp", "/assets/priv.jpg"];
             return (
               <motion.div
                 key={index}
@@ -252,12 +252,12 @@ const ServicesSection = ({ sectionRef }) => {
                       </div>
 
                       {/* CTA Button */}
-                      <div className="pt-2 sm:pt-4">
+                      {/* <div className="pt-2 sm:pt-4">
                         <div className="group/cta inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-300 cursor-pointer">
                           <span className="text-sm font-medium">Learn More</span>
                           <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

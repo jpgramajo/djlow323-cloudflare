@@ -8,57 +8,57 @@ const PlansSection = ({ sectionRef }) => {
   const router = useRouter();
   
   const packages = [
-    {
-      name: "ESSENTIAL",
-      subtitle: "Perfect for intimate gatherings",
-      duration: "3 Hours",
-      icon: Music,
-      gradient: "from-blue-400/20 to-cyan-400/20",
-      borderColor: "border-blue-400/30",
-      hoverGradient: "from-blue-400/10 to-cyan-400/10",
-      features: [
-        "Professional DJ Setup",
-        "Curated Music Library",
-        "Basic Ambient Lighting",
-        "Wireless Microphone",
-        "Complete Setup & Breakdown"
-      ]
-    },
-    {
-      name: "PREMIUM",
-      subtitle: "Most popular choice",
-      duration: "5 Hours",
-      icon: Star,
-      gradient: "from-orange-400/20 to-amber-400/20",
-      borderColor: "border-orange-400/30",
-      hoverGradient: "from-orange-400/10 to-amber-400/10",
-      features: [
-        "Everything in Essential",
-        "Enhanced Audio System",
-        "Dynamic LED Lighting",
-        "Atmospheric Effects",
-        "Live Music Requests",
-        "Interactive Photo Props"
-      ],
-      popular: true
-    },
-    {
-      name: "ELITE",
-      subtitle: "Ultimate experience",
-      duration: "8 Hours",
-      icon: Crown,
-      gradient: "from-violet-400/20 to-purple-400/20",
-      borderColor: "border-violet-400/30",
-      hoverGradient: "from-violet-400/10 to-purple-400/10",
-      features: [
-        "Everything in Premium",
-        "Live Mixing Performance",
-        "Professional MC Services",
-        "Custom Event Coordination",
-        "Social Media Integration"
-      ]
-    }
-  ];
+  {
+    name: "ESSENTIAL",
+    subtitle: "Perfect for intimate gatherings",
+    duration: "3 Hours",
+    icon: Music,
+    gradient: "from-blue-400/20 to-cyan-400/20",
+    borderColor: "border-blue-400/30",
+    hoverGradient: "from-blue-400/10 to-cyan-400/10",
+    features: [
+      "Professional DJ Setup",
+      "Curated Music Library",
+      "Basic Ambient Lighting",
+      "Microphone for Announcements",
+      "Complete Setup & Breakdown"
+    ]
+  },
+  {
+    name: "PREMIUM",
+    subtitle: "Most popular choice",
+    duration: "4 Hours",
+    icon: Star,
+    gradient: "from-orange-400/20 to-amber-400/20",
+    borderColor: "border-orange-400/30",
+    hoverGradient: "from-orange-400/10 to-amber-400/10",
+    features: [
+      "Everything in Essential",
+      "Basic Lighting (12 Uplights)",
+      "Live Music Requests",
+      "2 Dozen Party Favors"
+    ],
+  },
+  {
+    name: "ELITE",
+    subtitle: "Ultimate experience (Most popular for weddings & quinceañeras)",
+    duration: "8 Hours",
+    icon: Crown,
+    gradient: "from-violet-400/20 to-purple-400/20",
+    borderColor: "border-violet-400/30",
+    hoverGradient: "from-violet-400/10 to-purple-400/10",
+    features: [
+      "Everything in Premium",
+      "Advanced Lighting (20 Uplights)",
+      "Live Mixing Performance",
+      "Professional MC Services",
+      "Timeline Coordination",
+      "Social Media Integration",
+      "4 Dozen Party Favors"
+    ],
+    popular: true
+  }
+];
 
   return (
     <section
