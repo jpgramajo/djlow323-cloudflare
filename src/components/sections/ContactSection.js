@@ -5,16 +5,6 @@ import { SocialIcon } from 'react-social-icons';
 import { Mail, MapPin, Phone, Send, Heart } from 'lucide-react';
 
 const ContactSection = ({ sectionRef }) => {
-  const socialLinks = [
-    { url: 'https://www.tiktok.com/@djlow323', platform: 'tiktok' },
-    { url: 'https://open.spotify.com/user/djlow323', platform: 'spotify' },
-    { url: 'https://www.facebook.com/DjLow.LasVegas', platform: 'facebook' },
-    { url: 'https://x.com/DJLOW323', platform: 'twitter' },
-    { url: 'https://www.instagram.com/djlow323', platform: 'instagram' },
-    { url: 'https://www.youtube.com/@DjLowMixes', platform: 'youtube' },
-    { url: 'https://www.mixcloud.com/djlow323/', platform: 'mixcloud' }
-  ];
-
   const contactInfo = [
     {
       icon: Mail,
@@ -104,7 +94,7 @@ const ContactSection = ({ sectionRef }) => {
         </motion.div>
 
         {/* Enhanced Contact Content */}
-        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start">
+        <div className="gap-12 sm:gap-16 items-center">
           
           {/* Contact Information */}
           <motion.div
@@ -167,85 +157,7 @@ const ContactSection = ({ sectionRef }) => {
           </motion.div>
 
           {/* Social Media Section */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            {/* Social Header */}
-            <div className="text-center lg:text-left">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-4">
-                Follow the
-                <span className="block font-bold text-orange-400">Journey</span>
-              </h3>
-              <p className="text-white/60 font-light text-sm sm:text-base">
-                Stay connected and discover the latest mixes, behind-the-scenes moments, and upcoming events.
-              </p>
-            </div>
-
-            {/* Enhanced Social Grid */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 via-transparent to-violet-400/5 rounded-2xl sm:rounded-3xl blur-2xl"></div>
-              <div className="relative bg-white/[0.04] backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/10 p-6 sm:p-8">
-                {/* Glass Reflections */}
-                <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/[0.08] to-transparent rounded-t-2xl sm:rounded-t-3xl"></div>
-                <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-white/[0.04] to-transparent rounded-br-2xl sm:rounded-br-3xl"></div>
-                
-                <div className="relative">
-                  <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
-                    {socialLinks.map((social, index) => (
-                      <motion.div
-                        key={social.platform}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.1 }}
-                        className="group relative"
-                      >
-                        {/* Individual glow for each social icon */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-full blur-lg opacity-0 group-hover:opacity-80 transition-all duration-300"></div>
-                        <div className="relative bg-white/[0.08] backdrop-blur-md rounded-full border border-white/20 group-hover:border-orange-400/40 transition-all duration-300 p-2">
-                          <SocialIcon
-                            url={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ height: 44, width: 44 }}
-                            bgColor="transparent"
-                            className="transition-all duration-300"
-                          />
-                        </div>
-                        
-                        {/* Shimmer effect on hover */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Final CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="relative inline-block group">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-amber-400/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                <div className="relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white/[0.08] backdrop-blur-md rounded-full border border-white/20 hover:border-orange-400/40 transition-all duration-300">
-                  <Send className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
-                  <span className="text-sm sm:text-base text-white/90 font-medium">Ready to book your perfect event?</span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          
         </div>
       </div>
     </section>
