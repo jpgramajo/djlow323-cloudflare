@@ -267,7 +267,7 @@ const ServicesSection = ({ sectionRef }) => {
         </div>
 
         {/* Modern CTA */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -281,7 +281,7 @@ const ServicesSection = ({ sectionRef }) => {
               <span className="text-sm sm:text-base text-white/90 font-medium">Ready to create something extraordinary?</span>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

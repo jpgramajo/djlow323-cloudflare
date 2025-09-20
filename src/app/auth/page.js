@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import '@fontsource/archivo-black';
-import '@fontsource/syncopate';
-import '@fontsource/roboto';
+import { Mail, Shield, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
 
 const AuthPage = () => {
   const router = useRouter();
@@ -47,8 +45,7 @@ const AuthPage = () => {
     return emailRegex.test(email);
   };
 
-  const handleEmailSubmit = async (e) => {
-    e.preventDefault();
+  const handleEmailSubmit = async () => {
     setError('');
     setMessage('');
 
@@ -104,10 +101,14 @@ const AuthPage = () => {
       const prevInput = document.getElementById(`code-${index - 1}`);
       if (prevInput) prevInput.focus();
     }
+    
+    // Handle Enter key
+    if (e.key === 'Enter') {
+      handleVerificationSubmit();
+    }
   };
 
-  const handleVerificationSubmit = async (e) => {
-    e.preventDefault();
+  const handleVerificationSubmit = async () => {
     setError('');
     setMessage('');
 
@@ -153,219 +154,339 @@ const AuthPage = () => {
     }
   };
 
+  const handleEmailKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleEmailSubmit();
+    }
+  };
+
   if (isCheckingAuth) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="bg-[#fe9511] rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute inset-0 backdrop-blur-[100px] bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.02]"></div>
+        </div>
+
+        <div className="relative flex items-center justify-center min-h-screen p-6">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            <div className="relative bg-white/[0.08] backdrop-blur-2xl rounded-3xl border border-white/20 p-12 text-center">
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/[0.1] to-transparent rounded-t-3xl"></div>
+              
+              <div className="relative">
+                <div className="relative group/icon mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-2xl blur-lg"></div>
+                  <div className="relative w-20 h-20 mx-auto bg-white/[0.1] backdrop-blur-md rounded-2xl border border-orange-400/30 flex items-center justify-center">
+                    <div className="w-8 h-8 border-4 border-orange-400 border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                </div>
+                
+                <h1 className="text-2xl sm:text-3xl font-light text-white mb-4">
+                  Checking
+                  <span className="block font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                    Authentication
+                  </span>
+                </h1>
+                <p className="text-white/60 font-light">
+                  Please wait while we verify your session.
+                </p>
+              </div>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-[#fe9511] mb-2" style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-            Checking Authentication...
-          </h1>
-          <p className="text-[#b2a9aa]">
-            Please wait while we verify your session.
-          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
-      {/* Header */}
-      <div className="bg-black border-b border-[#b2a9aa]/20 py-6 px-6 flex-shrink-0">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+      {/* Enhanced Background with Glass Effect */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/6 w-96 h-96 bg-gradient-to-r from-orange-400/25 to-amber-400/25 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/6 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-violet-400/15 to-purple-400/15 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        
+        <div className="absolute inset-0 backdrop-blur-[100px] bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.02]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
+      </div>
+
+      {/* Enhanced Header */}
+      <div className="relative border-b border-white/10 py-6 px-4 sm:px-6">
+        <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-sm"></div>
+        <div className="relative max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <button
+            <motion.button
               onClick={goBack}
-              className="text-[#b2a9aa] hover:text-[#fe9511] transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </button>
+              <div className="absolute inset-0 bg-orange-400/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div className="relative p-2 bg-white/[0.08] backdrop-blur-md rounded-xl border border-white/20 hover:border-orange-400/40 transition-all duration-300">
+                <ArrowLeft className="w-6 h-6 text-white/70 group-hover:text-orange-400 transition-colors duration-300" />
+              </div>
+            </motion.button>
             <img src="/images/logo.webp" alt="DJLOW323" className="h-12 w-auto" />
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="relative flex-1 flex items-center justify-center p-4 sm:p-6 min-h-[calc(100vh-120px)]">
         <div className="w-full max-w-md">
           <AnimatePresence mode="wait">
             {step === 'email' ? (
               <motion.div
                 key="email"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-[#1a1a1a] border border-[#fe9511]/20 rounded-lg p-8"
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative group"
               >
-                <div className="text-center mb-8">
-                  <div className="bg-[#fe9511] rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h1 className="text-3xl font-bold text-[#fe9511] mb-2" style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-                    Welcome Back
-                  </h1>
-                  <p className="text-[#b2a9aa]">
-                    Please enter your email address.
-                  </p>
-                </div>
-
-                <form onSubmit={handleEmailSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-[#b2a9aa] text-sm font-medium mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-black border border-[#b2a9aa]/20 rounded-lg px-4 py-3 text-white focus:border-[#fe9511] focus:outline-none transition-colors"
-                      placeholder="your-email@example.com"
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  {error && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-red-500/10 border border-red-500/20 rounded-lg p-3"
-                    >
-                      <p className="text-red-400 text-sm">{error}</p>
-                    </motion.div>
-                  )}
-
-                  {message && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-green-500/10 border border-green-500/20 rounded-lg p-3"
-                    >
-                      <p className="text-green-400 text-sm">{message}</p>
-                    </motion.div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-[#fe9511] text-black py-3 rounded-lg font-bold hover:bg-[#fe9511]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ fontFamily: 'Archivo Black, sans-serif' }}
-                  >
-                    {isLoading ? (
-                      <div className="flex items-center justify-center space-x-2">
-                        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                        <span>Sending Code...</span>
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 via-transparent to-blue-400/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+                
+                {/* Main Card */}
+                <div className="relative bg-white/[0.08] backdrop-blur-2xl rounded-3xl border border-white/20 p-8 sm:p-10 hover:border-orange-400/30 transition-all duration-500 overflow-hidden">
+                  {/* Glass Reflections */}
+                  <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/[0.1] to-transparent rounded-t-3xl"></div>
+                  <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-white/[0.05] to-transparent rounded-br-3xl"></div>
+                  
+                  <div className="relative">
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                      <div className="relative group/icon mb-6">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-2xl blur-lg group-hover/icon:blur-xl transition-all duration-300"></div>
+                        <div className="relative w-16 h-16 mx-auto bg-white/[0.1] backdrop-blur-md rounded-2xl border border-orange-400/30 flex items-center justify-center group-hover/icon:scale-110 transition-transform duration-300">
+                          <Mail className="w-8 h-8 text-orange-400" />
+                        </div>
                       </div>
-                    ) : (
-                      'Send Verification Code'
-                    )}
-                  </button>
-                </form>
+                      
+                      <h1 className="text-3xl sm:text-4xl font-light text-white mb-4">
+                        Welcome
+                        <span className="block font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                          Back
+                        </span>
+                      </h1>
+                      <p className="text-white/60 font-light">
+                        Please enter your email address to continue.
+                      </p>
+                    </div>
 
-                <div className="mt-6 text-center">
-                  <p className="text-[#b2a9aa] text-sm">
-                    Don't have an account? Contact us for access.
-                  </p>
+                    <div className="space-y-6">
+                      <div>
+                        <label className="block text-white/80 text-sm font-medium mb-3">
+                          Email Address
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 to-amber-400/10 rounded-xl blur-md opacity-0 focus-within:opacity-100 transition-all duration-300"></div>
+                          <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onKeyPress={handleEmailKeyPress}
+                            className="relative w-full bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/40 focus:border-orange-400/50 focus:outline-none transition-all duration-300"
+                            placeholder="your-email@example.com"
+                            disabled={isLoading}
+                          />
+                        </div>
+                      </div>
+
+                      {error && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="relative group/error"
+                        >
+                          <div className="absolute inset-0 bg-red-400/20 rounded-xl blur-md"></div>
+                          <div className="relative bg-red-500/10 backdrop-blur-md border border-red-400/30 rounded-xl p-4 flex items-center gap-3">
+                            <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                            <p className="text-red-300 text-sm font-light">{error}</p>
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {message && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="relative group/success"
+                        >
+                          <div className="absolute inset-0 bg-green-400/20 rounded-xl blur-md"></div>
+                          <div className="relative bg-green-500/10 backdrop-blur-md border border-green-400/30 rounded-xl p-4 flex items-center gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                            <p className="text-green-300 text-sm font-light">{message}</p>
+                          </div>
+                        </motion.div>
+                      )}
+
+                      <motion.button
+                        onClick={handleEmailSubmit}
+                        disabled={isLoading}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="group/btn relative w-full overflow-hidden rounded-xl"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-400"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 opacity-50"></div>
+                        
+                        <div className="relative flex items-center justify-center py-4 font-semibold text-black transition-all duration-300">
+                          {isLoading ? (
+                            <div className="flex items-center space-x-3">
+                              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                              <span>Sending Code...</span>
+                            </div>
+                          ) : (
+                            'Send Verification Code'
+                          )}
+                        </div>
+                        
+                        <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+                        </div>
+                      </motion.button>
+                    </div>
+
+                    <div className="mt-8 text-center">
+                      <p className="text-white/50 text-sm font-light">
+                        Don't have an account? Contact us for access.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ) : (
               <motion.div
                 key="verification"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-[#1a1a1a] border border-[#fe9511]/20 rounded-lg p-8"
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative group"
               >
-                <div className="text-center mb-8">
-                  <div className="bg-[#fe9511] rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h1 className="text-3xl font-bold text-[#fe9511] mb-2" style={{ fontFamily: 'Archivo Black, sans-serif' }}>
-                    Verify Email
-                  </h1>
-                  <p className="text-[#b2a9aa] mb-2">
-                    We've sent a 6-digit code to
-                  </p>
-                  <p className="text-[#fe9511] font-semibold">{email}</p>
-                </div>
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 via-transparent to-violet-400/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+                
+                {/* Main Card */}
+                <div className="relative bg-white/[0.08] backdrop-blur-2xl rounded-3xl border border-white/20 p-8 sm:p-10 hover:border-orange-400/30 transition-all duration-500 overflow-hidden">
+                  {/* Glass Reflections */}
+                  <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/[0.1] to-transparent rounded-t-3xl"></div>
+                  <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-white/[0.05] to-transparent rounded-br-3xl"></div>
+                  
+                  <div className="relative">
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                      <div className="relative group/icon mb-6">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-2xl blur-lg group-hover/icon:blur-xl transition-all duration-300"></div>
+                        <div className="relative w-16 h-16 mx-auto bg-white/[0.1] backdrop-blur-md rounded-2xl border border-orange-400/30 flex items-center justify-center group-hover/icon:scale-110 transition-transform duration-300">
+                          <Shield className="w-8 h-8 text-orange-400" />
+                        </div>
+                      </div>
+                      
+                      <h1 className="text-3xl sm:text-4xl font-light text-white mb-4">
+                        Verify
+                        <span className="block font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                          Email
+                        </span>
+                      </h1>
+                      <p className="text-white/60 font-light mb-2">
+                        We've sent a 6-digit code to
+                      </p>
+                      <p className="text-orange-400 font-medium">{email}</p>
+                    </div>
 
-                <form onSubmit={handleVerificationSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-[#b2a9aa] text-sm font-medium mb-4 text-center">
-                      Enter Verification Code
-                    </label>
-                    <div className="flex justify-center space-x-3">
-                      {code.map((digit, index) => (
-                        <input
-                          key={index}
-                          id={`code-${index}`}
-                          type="text"
-                          maxLength={1}
-                          value={digit}
-                          onChange={(e) => handleCodeChange(index, e.target.value)}
-                          onKeyDown={(e) => handleCodeKeyDown(index, e)}
-                          className="w-12 h-12 bg-black border border-[#b2a9aa]/20 rounded-lg text-center text-white text-lg font-bold focus:border-[#fe9511] focus:outline-none transition-colors"
-                          disabled={isLoading}
-                        />
-                      ))}
+                    <div className="space-y-6">
+                      <div>
+                        <label className="block text-white/80 text-sm font-medium mb-4 text-center">
+                          Enter Verification Code
+                        </label>
+                        <div className="flex justify-center gap-3">
+                          {code.map((digit, index) => (
+                            <div key={index} className="relative group/input">
+                              <div className="absolute inset-0 bg-orange-400/20 rounded-xl blur-md opacity-0 group-focus-within/input:opacity-100 transition-all duration-300"></div>
+                              <input
+                                id={`code-${index}`}
+                                type="text"
+                                maxLength={1}
+                                value={digit}
+                                onChange={(e) => handleCodeChange(index, e.target.value)}
+                                onKeyDown={(e) => handleCodeKeyDown(index, e)}
+                                className="relative w-12 h-12 sm:w-14 sm:h-14 bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl text-center text-white text-lg font-bold focus:border-orange-400/50 focus:outline-none transition-all duration-300"
+                                disabled={isLoading}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {error && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="relative group/error"
+                        >
+                          <div className="absolute inset-0 bg-red-400/20 rounded-xl blur-md"></div>
+                          <div className="relative bg-red-500/10 backdrop-blur-md border border-red-400/30 rounded-xl p-4 flex items-center gap-3">
+                            <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                            <p className="text-red-300 text-sm font-light text-center">{error}</p>
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {message && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="relative group/success"
+                        >
+                          <div className="absolute inset-0 bg-green-400/20 rounded-xl blur-md"></div>
+                          <div className="relative bg-green-500/10 backdrop-blur-md border border-green-400/30 rounded-xl p-4 flex items-center gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                            <p className="text-green-300 text-sm font-light text-center">{message}</p>
+                          </div>
+                        </motion.div>
+                      )}
+
+                      <motion.button
+                        onClick={handleVerificationSubmit}
+                        disabled={isLoading}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="group/btn relative w-full overflow-hidden rounded-xl"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-400"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 opacity-50"></div>
+                        
+                        <div className="relative flex items-center justify-center py-4 font-semibold text-black transition-all duration-300">
+                          {isLoading ? (
+                            <div className="flex items-center space-x-3">
+                              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                              <span>Verifying...</span>
+                            </div>
+                          ) : (
+                            'Verify & Login'
+                          )}
+                        </div>
+                        
+                        <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+                        </div>
+                      </motion.button>
+                    </div>
+
+                    <div className="mt-8 text-center">
+                      <button
+                        onClick={() => setStep('email')}
+                        className="text-orange-400 hover:text-orange-300 text-sm font-light transition-colors duration-300"
+                      >
+                        Didn't receive the code? Try again
+                      </button>
                     </div>
                   </div>
-
-                  {error && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-red-500/10 border border-red-500/20 rounded-lg p-3"
-                    >
-                      <p className="text-red-400 text-sm text-center">{error}</p>
-                    </motion.div>
-                  )}
-
-                  {message && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-green-500/10 border border-green-500/20 rounded-lg p-3"
-                    >
-                      <p className="text-green-400 text-sm text-center">{message}</p>
-                    </motion.div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-[#fe9511] text-black py-3 rounded-lg font-bold hover:bg-[#fe9511]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ fontFamily: 'Archivo Black, sans-serif' }}
-                  >
-                    {isLoading ? (
-                      <div className="flex items-center justify-center space-x-2">
-                        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                        <span>Verifying...</span>
-                      </div>
-                    ) : (
-                      'Verify & Login'
-                    )}
-                  </button>
-                </form>
-
-                <div className="mt-6 text-center">
-                  <button
-                    onClick={() => setStep('email')}
-                    className="text-[#fe9511] hover:text-[#fe9511]/80 text-sm transition-colors"
-                  >
-                    Didn't receive the code? Try again
-                  </button>
                 </div>
               </motion.div>
             )}
