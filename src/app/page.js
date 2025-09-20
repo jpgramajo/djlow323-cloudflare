@@ -125,14 +125,24 @@ const DJLandingPage = () => {
   };
 
   const scrollToSection = (sectionName) => {
-    const ref = sectionRefs[sectionName];
-    if (ref.current) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+    // Map MIXES to MIX_CLOUD for consistency
+    const mappedSectionName = sectionName === 'MIXES' ? 'MIX_CLOUD' : sectionName;
+    const ref = sectionRefs[mappedSectionName];
+
+    // Close mobile menu first
     setIsMobileMenuOpen(false);
+
+    // Add delay for mobile to ensure menu closes before scrolling
+    const scrollDelay = isMobile ? 300 : 0;
+
+    setTimeout(() => {
+      if (ref && ref.current) {
+        ref.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, scrollDelay);
   };
 
   const handleMobileNavigation = (direction) => {
