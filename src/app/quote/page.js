@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, User, Calendar, MapPin, MessageSquare, FileText, Sparkles, Send, Bot, CheckCircle } from 'lucide-react';
 import Footer from '../../components/Footer';
 
-const QuotePage = () => {
+const QuotePageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState('form');
@@ -862,6 +862,21 @@ const QuotePage = () => {
         )}
       </div>
     </div>
+  );
+};
+
+const QuotePage = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 mx-auto mb-4 border-4 border-orange-400 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white/60">Loading...</p>
+        </div>
+      </div>
+    }>
+      <QuotePageContent />
+    </Suspense>
   );
 };
 
