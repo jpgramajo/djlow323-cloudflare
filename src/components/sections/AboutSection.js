@@ -149,41 +149,6 @@ const AboutSection = ({ sectionRef }) => {
               </div>
             </div>
 
-            {/* Enhanced Achievements */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group relative"
-                >
-                  {/* Glow Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${achievement.gradient} rounded-xl sm:rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-all duration-500`}></div>
-                  
-                  {/* Main Card */}
-                  <div className="relative text-center p-4 sm:p-6 bg-white/[0.06] backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/[0.08]">
-                    {/* Glass Reflections */}
-                    <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/[0.1] to-transparent rounded-t-xl sm:rounded-t-2xl"></div>
-                    <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-white/[0.05] to-transparent rounded-br-xl sm:rounded-br-2xl"></div>
-                    
-                    <div className="relative">
-                      <div className="relative group/icon mb-3 sm:mb-4">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${achievement.gradient} rounded-lg sm:rounded-xl blur-md group-hover/icon:blur-lg transition-all duration-300`}></div>
-                        <div className="relative inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/[0.08] backdrop-blur-md rounded-lg sm:rounded-xl border border-white/20 group-hover/icon:scale-110 transition-all duration-300">
-                          <achievement.icon className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
-                        </div>
-                      </div>
-                      <h4 className="text-white font-semibold text-sm sm:text-base mb-1 sm:mb-2 group-hover:text-orange-400 transition-colors duration-300">{achievement.title}</h4>
-                      <p className="text-white/60 text-xs sm:text-sm font-light">{achievement.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
             {/* Enhanced Social Media */}
             <div className="space-y-4 sm:space-y-6">
               <motion.h3
