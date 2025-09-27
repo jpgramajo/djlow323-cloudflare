@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, User, Calendar, MapPin, MessageSquare, FileText, Sparkles, Send, Bot, CheckCircle } from 'lucide-react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import Footer from '../../components/Footer';
 
 const QuotePageContent = () => {
@@ -405,33 +406,59 @@ const QuotePageContent = () => {
         {/* Enhanced Header with better visibility */}
         <div className="border-b border-white/20 py-6 px-4 sm:px-6 flex-shrink-0 relative z-10">
           <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"></div>
-          <div className="relative max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <motion.button
-                onClick={goBack}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative"
-              >
-                <div className="absolute inset-0 bg-orange-400/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                <div className="relative p-2 bg-white/[0.12] backdrop-blur-md rounded-xl border border-white/30 hover:border-orange-400/50 transition-all duration-300">
-                  <ArrowLeft className="w-6 h-6 text-white group-hover:text-orange-400 transition-colors duration-300" />
-                </div>
-              </motion.button>
-              
-              <img src="/images/logo.webp" alt="DJLOW323" className="h-12 w-auto" />
-              
-              <div className="relative group">
-                <div className="absolute inset-0 bg-orange-400/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
-                <div className="relative px-4 py-2 bg-white/[0.12] backdrop-blur-md rounded-2xl border border-orange-400/40">
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-light text-white">
-                    Get Your
-                    <span className="font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent ml-2">
-                      Quote
-                    </span>
-                  </h1>
+          <div className="relative max-w-7xl mx-auto">
+            {/* Main header content */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <motion.button
+                  onClick={goBack}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative"
+                >
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                  <div className="relative p-2 bg-white/[0.12] backdrop-blur-md rounded-xl border border-white/30 hover:border-orange-400/50 transition-all duration-300">
+                    <ArrowLeft className="w-6 h-6 text-white group-hover:text-orange-400 transition-colors duration-300" />
+                  </div>
+                </motion.button>
+
+                <img src="/images/logo.webp" alt="DJLOW323" className="h-12 w-auto" />
+
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                  <div className="relative px-4 py-2 bg-white/[0.12] backdrop-blur-md rounded-2xl border border-orange-400/40">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl font-light text-white">
+                      Get Your
+                      <span className="font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent ml-2">
+                        Quote
+                      </span>
+                    </h1>
+                  </div>
                 </div>
               </div>
+
+              {/* Cloudflare Turnstile Widget - Desktop only */}
+              <div className="hidden md:flex items-center">
+                <Turnstile
+                  siteKey={'0x4AAAAAAB3mnehJw_KXHjtQ'}
+                  options={{
+                    theme: 'dark',
+                    size: 'flexible'
+                  }}
+                />
+                {/* 'normal' | 'compact' | 'flexible' | 'invisible' */}
+              </div>
+            </div>
+
+            {/* Cloudflare Turnstile Widget - Mobile only */}
+            <div className="md:hidden mt-4 flex justify-center">
+              <Turnstile
+                siteKey={'0x4AAAAAAB3mnehJw_KXHjtQ'}
+                options={{
+                  theme: 'dark',
+                  size: 'flexible'
+                }}
+              />
             </div>
           </div>
         </div>
@@ -850,16 +877,6 @@ const QuotePageContent = () => {
             )}
           </AnimatePresence>
         </div>
-
-        {/* Footer with better visibility - Only show for form tab */}
-        {activeTab === 'form' && (
-          <div className="relative z-10">
-            <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-md"></div>
-            <div className="relative">
-              <Footer />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -875,7 +892,7 @@ const QuotePage = () => {
         </div>
       </div>
     }>
-      <QuotePageContent />
+      <QuotePageContent />  
     </Suspense>
   );
 };
