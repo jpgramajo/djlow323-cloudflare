@@ -34,6 +34,11 @@ const QuotePageContent = () => {
   const [turnstileToken, setTurnstileToken] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [dateComponents, setDateComponents] = useState({
+    month: '',
+    day: '',
+    year: ''
+  });
   const messagesEndRef = useRef(null);
   const turnstileRef = useRef(null);
 
@@ -63,6 +68,45 @@ const QuotePageContent = () => {
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Generate arrays for date selectors
+  const months = [
+    { value: '01', label: 'January' },
+    { value: '02', label: 'February' },
+    { value: '03', label: 'March' },
+    { value: '04', label: 'April' },
+    { value: '05', label: 'May' },
+    { value: '06', label: 'June' },
+    { value: '07', label: 'July' },
+    { value: '08', label: 'August' },
+    { value: '09', label: 'September' },
+    { value: '10', label: 'October' },
+    { value: '11', label: 'November' },
+    { value: '12', label: 'December' }
+  ];
+
+  const days = Array.from({ length: 31 }, (_, i) => {
+    const day = (i + 1).toString().padStart(2, '0');
+    return { value: day, label: day };
+  });
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 10 }, (_, i) => {
+    const year = currentYear + i;
+    return { value: year.toString(), label: year.toString() };
+  });
+
+  const formatDateFromComponents = (month, day, year) => {
+    if (month && day && year) {
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  };
+
+  const updateFormDataDate = (month, day, year) => {
+    const formattedDate = formatDateFromComponents(month, day, year);
+    setFormData(prev => ({ ...prev, eventDate: formattedDate }));
   };
 
   useEffect(() => {
@@ -306,6 +350,12 @@ const QuotePageContent = () => {
           eventLocation: '',
           eventDetails: ''
         });
+        // Reset date components
+        setDateComponents({
+          month: '',
+          day: '',
+          year: ''
+        });
         // Reset Turnstile
         setTurnstileToken('');
         if (turnstileRef.current) {
@@ -383,13 +433,77 @@ const QuotePageContent = () => {
           <div className="relative space-y-4">
             <div className="relative">
               <div className="absolute inset-0 bg-blue-400/10 rounded-xl blur-md opacity-0 focus-within:opacity-100 transition-all duration-300"></div>
-              <input
-                type="date"
-                value={selectedOption}
-                onChange={(e) => handleOptionSelect(e.target.value)}
-                className="relative w-full bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300"
-                min={new Date().toISOString().split('T')[0]}
-              />
+              <div className="relative flex gap-2">
+                {/* Month Selector */}
+                <select
+                  value={dateComponents.month}
+                  onChange={(e) => {
+                    const newMonth = e.target.value;
+                    setDateComponents(prev => ({ ...prev, month: newMonth }));
+                    const formattedDate = formatDateFromComponents(newMonth, dateComponents.day, dateComponents.year);
+                    if (formattedDate) {
+                      setSelectedOption(formattedDate);
+                      setCanSend(true);
+                    }
+                  }}
+                  className="flex-1 bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-3 py-3 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none text-sm"
+                >
+                  <option value="" className="bg-slate-900">Month</option>
+                  {months.map((month) => (
+                    <option key={month.value} value={month.value} className="bg-slate-900">
+                      {month.label}
+                    </option>
+                  ))}
+                </select>
+
+                <span className="text-white/60 self-center">/</span>
+
+                {/* Day Selector */}
+                <select
+                  value={dateComponents.day}
+                  onChange={(e) => {
+                    const newDay = e.target.value;
+                    setDateComponents(prev => ({ ...prev, day: newDay }));
+                    const formattedDate = formatDateFromComponents(dateComponents.month, newDay, dateComponents.year);
+                    if (formattedDate) {
+                      setSelectedOption(formattedDate);
+                      setCanSend(true);
+                    }
+                  }}
+                  className="flex-1 bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-3 py-3 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none text-sm"
+                >
+                  <option value="" className="bg-slate-900">Day</option>
+                  {days.map((day) => (
+                    <option key={day.value} value={day.value} className="bg-slate-900">
+                      {day.label}
+                    </option>
+                  ))}
+                </select>
+
+                <span className="text-white/60 self-center">/</span>
+
+                {/* Year Selector */}
+                <select
+                  value={dateComponents.year}
+                  onChange={(e) => {
+                    const newYear = e.target.value;
+                    setDateComponents(prev => ({ ...prev, year: newYear }));
+                    const formattedDate = formatDateFromComponents(dateComponents.month, dateComponents.day, newYear);
+                    if (formattedDate) {
+                      setSelectedOption(formattedDate);
+                      setCanSend(true);
+                    }
+                  }}
+                  className="flex-1 bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-3 py-3 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none text-sm"
+                >
+                  <option value="" className="bg-slate-900">Year</option>
+                  {years.map((year) => (
+                    <option key={year.value} value={year.value} className="bg-slate-900">
+                      {year.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <motion.button
               onClick={handleAISendResponse}
@@ -400,7 +514,7 @@ const QuotePageContent = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-400"></div>
               <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10"></div>
-              
+
               <div className="relative flex items-center justify-center py-3 font-semibold text-black">
                 <Send className="w-5 h-5 mr-2" />
                 Send
@@ -648,7 +762,7 @@ const QuotePageContent = () => {
         </div>
 
         {/* Content */}
-        <div className={activeTab === 'ai' ? 'flex-1 flex flex-col' : 'relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1'}>
+        <div className={activeTab === 'ai' ? 'flex-1 flex flex-col min-h-0' : 'relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1'}>
           <AnimatePresence mode="wait">
             {activeTab === 'form' ? (
               <motion.div
@@ -830,14 +944,68 @@ const QuotePageContent = () => {
                                     </label>
                                     <div className="relative">
                                       <div className="absolute inset-0 bg-blue-400/10 rounded-xl blur-md opacity-0 group-focus-within/input:opacity-100 transition-all duration-300"></div>
-                                      <input
-                                        type="date"
-                                        required
-                                        value={formData.eventDate}
-                                        onChange={(e) => setFormData({...formData, eventDate: e.target.value})}
-                                        className="relative w-full bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300"
-                                        min={new Date().toISOString().split('T')[0]}
-                                      />
+                                      <div className="relative flex gap-2">
+                                        {/* Month Selector */}
+                                        <select
+                                          value={dateComponents.month}
+                                          onChange={(e) => {
+                                            const newMonth = e.target.value;
+                                            setDateComponents(prev => ({ ...prev, month: newMonth }));
+                                            updateFormDataDate(newMonth, dateComponents.day, dateComponents.year);
+                                          }}
+                                          required
+                                          className="flex-1 bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl px-3 py-4 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none"
+                                        >
+                                          <option value="" className="bg-slate-900">Month</option>
+                                          {months.map((month) => (
+                                            <option key={month.value} value={month.value} className="bg-slate-900">
+                                              {month.label}
+                                            </option>
+                                          ))}
+                                        </select>
+
+                                        <span className="text-white/60 self-center">/</span>
+
+                                        {/* Day Selector */}
+                                        <select
+                                          value={dateComponents.day}
+                                          onChange={(e) => {
+                                            const newDay = e.target.value;
+                                            setDateComponents(prev => ({ ...prev, day: newDay }));
+                                            updateFormDataDate(dateComponents.month, newDay, dateComponents.year);
+                                          }}
+                                          required
+                                          className="flex-1 bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl px-3 py-4 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none"
+                                        >
+                                          <option value="" className="bg-slate-900">Day</option>
+                                          {days.map((day) => (
+                                            <option key={day.value} value={day.value} className="bg-slate-900">
+                                              {day.label}
+                                            </option>
+                                          ))}
+                                        </select>
+
+                                        <span className="text-white/60 self-center">/</span>
+
+                                        {/* Year Selector */}
+                                        <select
+                                          value={dateComponents.year}
+                                          onChange={(e) => {
+                                            const newYear = e.target.value;
+                                            setDateComponents(prev => ({ ...prev, year: newYear }));
+                                            updateFormDataDate(dateComponents.month, dateComponents.day, newYear);
+                                          }}
+                                          required
+                                          className="flex-1 bg-white/[0.05] backdrop-blur-md border border-white/20 rounded-xl px-3 py-4 text-white focus:border-blue-400/50 focus:outline-none transition-all duration-300 appearance-none"
+                                        >
+                                          <option value="" className="bg-slate-900">Year</option>
+                                          {years.map((year) => (
+                                            <option key={year.value} value={year.value} className="bg-slate-900">
+                                              {year.label}
+                                            </option>
+                                          ))}
+                                        </select>
+                                      </div>
                                     </div>
                                   </div>
                                   
@@ -972,9 +1140,9 @@ const QuotePageContent = () => {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="flex-1 flex justify-center"
               >
-                <div className="w-full lg:max-w-[50%] flex flex-col h-full">
+                <div className="w-full lg:max-w-[50%] flex flex-col h-full md:max-h-[calc(100vh-280px)]">
                   {/* Messages Area */}
-                  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                  <div className="flex-1 overflow-y-auto p-6 space-y-4 md:min-h-0">
                     {messages.map((message) => (
                       <div
                         key={message.id}
@@ -1030,6 +1198,41 @@ const QuotePageContent = () => {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+
+        {/* Footer - Desktop only */}
+        <div className="hidden md:block border-t border-white/20 bg-slate-950/80 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Back to Home Button */}
+              <motion.button
+                onClick={goBack}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-orange-400/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                <div className="relative flex items-center gap-2 px-4 py-2 bg-white/[0.12] backdrop-blur-md rounded-xl border border-white/30 hover:border-orange-400/50 transition-all duration-300">
+                  <ArrowLeft className="w-4 h-4 text-white group-hover:text-orange-400 transition-colors duration-300" />
+                  <span className="text-white group-hover:text-orange-400 transition-colors duration-300 text-sm font-medium">
+                    Back to Home
+                  </span>
+                </div>
+              </motion.button>
+
+              {/* Footer Text */}
+              <div className="text-center">
+                <p className="text-white/60 text-sm">
+                  © 2024 DJLOW323. All rights reserved.
+                </p>
+              </div>
+
+              {/* Logo */}
+              <div className="flex items-center">
+                <img src="/images/logo.webp" alt="DJLOW323" className="h-8 w-auto opacity-70" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
