@@ -130,7 +130,7 @@ export async function POST(req) {
         const resend = new Resend(env.RESEND_API_KEY);
         await resend.emails.send({
             from: 'DJLOW Website Quotes <noreply@notifications.djlow323.com>',
-            to: ['juanpacloud@gmail.com'],
+            to: ['deejaylow323@icloud.com'],
             subject: `Nueva Solicitud de Cotización - ${emailData.firstName} ${emailData.lastName}`,
             html: formatQuoteEmail(emailData),
         });
