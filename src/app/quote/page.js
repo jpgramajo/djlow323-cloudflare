@@ -31,7 +31,11 @@ const QuotePageContent = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [currentStep, setCurrentStep] = useState('welcome');
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
   const messagesEndRef = useRef(null);
+  const turnstileRef = useRef(null);
 
   const eventTypes = [
     "Wedding",
@@ -103,7 +107,7 @@ const QuotePageContent = () => {
     setMessages([]);
     
     await simulateTyping();
-    addMessage("Hello! I'm DJLOW323's virtual assistant. I'll help you get a personalized quote for your event. What type of event are you planning?", 'ai');
+    addMessage("Hello! I'm DJLOW's virtual assistant. I'll help you get a personalized quote for your event. What type of event are you planning?", 'ai');
     setCurrentStep('eventType');
   };
 
@@ -188,13 +192,67 @@ const QuotePageContent = () => {
       setUserInput('');
 
       await simulateTyping();
+      addMessage("Great! One last question: Do you have any additional details or special requests for your event? (number of guests, music preferences, special equipment, etc.) You can also just say 'none' if you don't have any.", 'ai');
+      setCurrentStep('eventDetails');
+    } else if (currentStep === 'eventDetails' && userInput.trim()) {
+      addMessage(userInput.trim(), 'user');
+      const details = userInput.trim().toLowerCase() === 'none' ? '' : userInput.trim();
+      setFormData(prev => ({ ...prev, eventDetails: details }));
+      setUserInput('');
+
+      await simulateTyping();
       addMessage("Perfect! I have all the necessary information. Let me process your request...", 'ai');
-      
+
+      // Send the actual quote request
       setTimeout(async () => {
-        await simulateTyping();
-        const eventTypeLabel = aiEventTypes.find(t => t.value === formData.eventType)?.label || 'event';
-        addMessage(`All set! I've sent your quote request. We'll contact you soon at ${formData.email} with a personalized proposal for your ${eventTypeLabel.toLowerCase()}. Thank you for choosing DJLOW323!`, 'ai');
-        setCurrentStep('completed');
+        if (!turnstileToken) {
+          await simulateTyping();
+          addMessage("I need you to complete the security verification first. Please check the widget above and try again.", 'ai');
+          setCurrentStep('eventDetails'); // Go back to allow retry
+          return;
+        }
+
+        // Get the updated formData with the eventDetails
+        const finalFormData = {
+          ...formData,
+          eventDetails: details
+        };
+
+        try {
+          const response = await fetch('/api/request_quote', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...finalFormData,
+              turnstileToken: turnstileToken
+            }),
+          });
+
+          const result = await response.json();
+
+          await simulateTyping();
+          if (response.ok) {
+            const eventTypeLabel = aiEventTypes.find(t => t.value === finalFormData.eventType)?.label || 'event';
+            addMessage(`All set! I've sent your quote request. We'll contact you soon at ${finalFormData.email} with a personalized proposal for your ${eventTypeLabel.toLowerCase()}. Thank you for choosing DJLOW323! 🎉`, 'ai');
+            setCurrentStep('completed');
+
+            // Reset Turnstile
+            setTurnstileToken('');
+            if (turnstileRef.current) {
+              turnstileRef.current.reset();
+            }
+          } else {
+            addMessage(`I'm sorry, there was an error sending your request: ${result.message}. Please try again or use the traditional form.`, 'ai');
+            setCurrentStep('eventDetails'); // Allow retry
+          }
+        } catch (error) {
+          console.error('AI Chat API Error:', error);
+          await simulateTyping();
+          addMessage("I'm sorry, there was a network error. Please check your connection and try again, or use the traditional form.", 'ai');
+          setCurrentStep('eventDetails'); // Allow retry
+        }
       }, 2000);
     }
   };
@@ -209,10 +267,59 @@ const QuotePageContent = () => {
     setCanSend(value.trim().length > 0);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you! Your request has been sent. We will contact you soon.');
+
+    if (!turnstileToken) {
+      alert('Please complete the security verification first.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/request_quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken: turnstileToken
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage(result.message);
+        // Reset form
+        setFormData({
+          eventType: '',
+          customEventType: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          eventDate: '',
+          eventTime: '',
+          eventLocation: '',
+          eventDetails: ''
+        });
+        // Reset Turnstile
+        setTurnstileToken('');
+        if (turnstileRef.current) {
+          turnstileRef.current.reset();
+        }
+      } else {
+        setSubmitMessage(result.message || 'An error occurred. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const goBack = () => {
@@ -344,29 +451,39 @@ const QuotePageContent = () => {
       );
     }
 
-    if (currentStep === 'fullName' || currentStep === 'email' || currentStep === 'eventLocation') {
+    if (currentStep === 'fullName' || currentStep === 'email' || currentStep === 'eventLocation' || currentStep === 'eventDetails') {
       return (
         <div className="relative p-6">
           <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-sm rounded-b-3xl"></div>
           <div className="relative flex gap-3">
             <div className="flex-1 relative">
               <div className="absolute inset-0 bg-orange-400/10 rounded-xl blur-md opacity-0 focus-within:opacity-100 transition-all duration-300"></div>
-              <input
-                type={currentStep === 'email' ? 'email' : 'text'}
-                value={userInput}
-                onChange={(e) => handleInputChange(e.target.value)}
-                placeholder={
-                  currentStep === 'fullName' ? 'Your full name...' :
-                  currentStep === 'email' ? 'your-email@example.com' :
-                  'Event location...'
-                }
-                className="relative w-full bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/40 focus:border-orange-400/50 focus:outline-none transition-all duration-300"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && canSend) {
-                    handleAISendResponse();
+              {currentStep === 'eventDetails' ? (
+                <textarea
+                  value={userInput}
+                  onChange={(e) => handleInputChange(e.target.value)}
+                  placeholder="Additional details (number of guests, music preferences, special equipment, etc.) or type 'none'"
+                  rows={3}
+                  className="relative w-full bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/40 focus:border-orange-400/50 focus:outline-none transition-all duration-300 resize-none"
+                />
+              ) : (
+                <input
+                  type={currentStep === 'email' ? 'email' : 'text'}
+                  value={userInput}
+                  onChange={(e) => handleInputChange(e.target.value)}
+                  placeholder={
+                    currentStep === 'fullName' ? 'Your full name...' :
+                    currentStep === 'email' ? 'your-email@example.com' :
+                    'Event location...'
                   }
-                }}
-              />
+                  className="relative w-full bg-white/[0.08] backdrop-blur-md border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/40 focus:border-orange-400/50 focus:outline-none transition-all duration-300"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && canSend) {
+                      handleAISendResponse();
+                    }
+                  }}
+                />
+              )}
             </div>
             <motion.button
               onClick={handleAISendResponse}
@@ -440,11 +557,15 @@ const QuotePageContent = () => {
               {/* Cloudflare Turnstile Widget - Desktop only */}
               <div className="hidden md:flex items-center">
                 <Turnstile
+                  ref={turnstileRef}
                   siteKey={'0x4AAAAAAB3mnehJw_KXHjtQ'}
                   options={{
                     theme: 'dark',
                     size: 'flexible'
                   }}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken('')}
+                  onExpire={() => setTurnstileToken('')}
                 />
                 {/* 'normal' | 'compact' | 'flexible' | 'invisible' */}
               </div>
@@ -458,6 +579,9 @@ const QuotePageContent = () => {
                   theme: 'dark',
                   size: 'flexible'
                 }}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onError={() => setTurnstileToken('')}
+                onExpire={() => setTurnstileToken('')}
               />
             </div>
           </div>
@@ -785,24 +909,54 @@ const QuotePageContent = () => {
 
                         {/* Submit Button */}
                         <div className="text-center pt-4">
+                          {submitMessage && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className={`mb-4 p-4 rounded-xl border ${
+                                submitMessage.includes('ERROR') || submitMessage.includes('error')
+                                  ? 'bg-red-500/10 border-red-500/30 text-red-400'
+                                  : 'bg-green-500/10 border-green-500/30 text-green-400'
+                              }`}
+                            >
+                              <p className="text-sm font-medium">{submitMessage}</p>
+                            </motion.div>
+                          )}
+
                           <motion.button
                             onClick={handleFormSubmit}
+                            disabled={isSubmitting || !turnstileToken}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="group/btn relative overflow-hidden rounded-2xl"
+                            className="group/btn relative overflow-hidden rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-400"></div>
                             <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 opacity-50"></div>
-                            
+
                             <div className="relative flex items-center justify-center gap-3 px-12 py-4 font-bold text-black text-lg transition-all duration-300">
-                              <Send className="w-6 h-6" />
-                              <span>SEND REQUEST</span>
+                              {isSubmitting ? (
+                                <>
+                                  <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                                  <span>SENDING...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Send className="w-6 h-6" />
+                                  <span>SEND REQUEST</span>
+                                </>
+                              )}
                             </div>
-                            
+
                             <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
                               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                             </div>
                           </motion.button>
+
+                          {!turnstileToken && (
+                            <p className="text-white/60 text-sm mt-3">
+                              Please complete the security verification above to enable the send button.
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
