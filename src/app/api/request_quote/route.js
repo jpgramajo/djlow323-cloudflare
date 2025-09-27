@@ -27,25 +27,25 @@ function formatQuoteEmail(data) {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
             <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <h1 style="color: #fe9511; margin: 0; font-size: 28px;">Nueva Solicitud de Cotización</h1>
+                    <h1 style="color: #fe9511; margin: 0; font-size: 28px;">New Quote Request</h1>
                     <p style="color: #666; margin: 10px 0 0 0;">DJLOW323 Website</p>
                 </div>
 
                 <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <h2 style="color: #333; margin: 0 0 15px 0; font-size: 20px;">📋 Información Personal</h2>
-                    <p style="margin: 8px 0; color: #555;"><strong>Nombre:</strong> ${data.firstName} ${data.lastName}</p>
+                    <h2 style="color: #333; margin: 0 0 15px 0; font-size: 20px;">📋 Personal Information</h2>
+                    <p style="margin: 8px 0; color: #555;"><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
                     <p style="margin: 8px 0; color: #555;"><strong>Email:</strong> ${data.email}</p>
                 </div>
 
                 <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <h2 style="color: #333; margin: 0 0 15px 0; font-size: 20px;">🎉 Detalles del Evento</h2>
-                    <p style="margin: 8px 0; color: #555;"><strong>Tipo de evento:</strong> ${eventTypeDisplay}</p>
-                    <p style="margin: 8px 0; color: #555;"><strong>Fecha:</strong> ${data.eventDate}</p>
-                    <p style="margin: 8px 0; color: #555;"><strong>Hora aproximada:</strong> ${data.eventTime}</p>
-                    <p style="margin: 8px 0; color: #555;"><strong>Ubicación:</strong> ${data.eventLocation}</p>
+                    <h2 style="color: #333; margin: 0 0 15px 0; font-size: 20px;">🎉 Event Details</h2>
+                    <p style="margin: 8px 0; color: #555;"><strong>Event type:</strong> ${eventTypeDisplay}</p>
+                    <p style="margin: 8px 0; color: #555;"><strong>Date:</strong> ${data.eventDate}</p>
+                    <p style="margin: 8px 0; color: #555;"><strong>Approximate time:</strong> ${data.eventTime}</p>
+                    <p style="margin: 8px 0; color: #555;"><strong>Location:</strong> ${data.eventLocation}</p>
                     ${data.eventDetails ? `
                         <div style="margin-top: 15px;">
-                            <p style="margin: 8px 0; color: #555;"><strong>Detalles adicionales:</strong></p>
+                            <p style="margin: 8px 0; color: #555;"><strong>Additional details:</strong></p>
                             <div style="background-color: #ffffff; padding: 15px; border-left: 4px solid #fe9511; border-radius: 4px;">
                                 <p style="margin: 0; color: #666; line-height: 1.5;">${data.eventDetails}</p>
                             </div>
@@ -55,8 +55,8 @@ function formatQuoteEmail(data) {
 
                 <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                     <p style="color: #888; margin: 0; font-size: 14px;">
-                        Esta solicitud fue enviada desde el sitio web de DJLOW323<br>
-                        Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'UTC' })} UTC
+                        This request was sent from DJLOW323's website<br>
+                        Date: ${new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC
                     </p>
                 </div>
             </div>
@@ -131,7 +131,7 @@ export async function POST(req) {
         await resend.emails.send({
             from: 'DJLOW Website Quotes <noreply@notifications.djlow323.com>',
             to: ['deejaylow323@icloud.com'],
-            subject: `Nueva Solicitud de Cotización - ${emailData.firstName} ${emailData.lastName}`,
+            subject: `New Quote Request - ${emailData.firstName} ${emailData.lastName}`,
             html: formatQuoteEmail(emailData),
         });
 
