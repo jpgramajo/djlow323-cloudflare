@@ -13,7 +13,7 @@ import ServicesSection from '../components/sections/ServicesSection';
 import PlansSection from '../components/sections/PlansSection';
 import AboutSection from '../components/sections/AboutSection';
 import MixcloudSection from '@/components/sections/MixcloudSection';
-import GallerySection from '../components/sections/GallerySection';
+import GallerySection from '@/components/sections/GallerySection';
 import FAQSection from '../components/sections/FAQSection';
 import ContactSection from '../components/sections/ContactSection';
 
@@ -47,7 +47,7 @@ const DJLandingPage = () => {
     PLANS: useRef(null),
     ABOUT: useRef(null),
     MIX_CLOUD: useRef(null),
-    // GALLERY: useRef(null),
+    GALLERY: useRef(null),
     FAQ: useRef(null),
     CONTACT: useRef(null)
   };
@@ -58,7 +58,7 @@ const DJLandingPage = () => {
     'PLANS',
     'ABOUT',
     'MIXES',
-    // 'GALLERY',
+    'GALLERY',
     'FAQ',
     'CONTACT'
   ];
@@ -178,7 +178,7 @@ const DJLandingPage = () => {
       <PlansSection sectionRef={sectionRefs.PLANS} />
       <AboutSection sectionRef={sectionRefs.ABOUT} />
       <MixcloudSection sectionRef={sectionRefs.MIX_CLOUD} />
-      {/* <GallerySection sectionRef={sectionRefs.GALLERY} /> */}
+      <GallerySection sectionRef={sectionRefs.GALLERY} />
       <FAQSection sectionRef={sectionRefs.FAQ} />
       <ContactSection sectionRef={sectionRefs.CONTACT} />
 
