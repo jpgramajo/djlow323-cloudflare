@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import '@fontsource/archivo-black';
@@ -41,28 +42,41 @@ export default function UserLayout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Header */}
-      <div className="bg-black border-b border-[#b2a9aa]/20 py-6 px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <img src="/images/logo.webp" alt="DJLOW323" className="h-12 w-auto" />
+    <div className="min-h-screen bg-black text-white overflow-hidden relative">
+      {/* Animated background shapes */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-l from-red-500/15 to-orange-500/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      {/* Header with Glassmorphism */}
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="sticky top-0 z-20 bg-black/30 backdrop-blur-lg border-b border-white/10"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between p-4 sm:p-6">
+          <div className="flex items-center">
+            <img src="/images/logo.webp" alt="DJLOW323" className="h-10 sm:h-12 w-auto" />
           </div>
 
           <button
             onClick={handleLogout}
-            className="bg-[#b2a9aa]/20 hover:bg-red-500/20 border border-[#b2a9aa]/20 hover:border-red-500/20 text-[#b2a9aa] hover:text-red-400 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300"
+            className="bg-white/10 hover:bg-red-500/20 border border-white/20 hover:border-red-500/30 text-white hover:text-red-300 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 backdrop-blur-sm"
             style={{ fontFamily: 'Syncopate, sans-serif' }}
           >
             LOGOUT
           </button>
         </div>
-      </div>
+      </motion.header>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto p-6">
-        {children}
-      </div>
+      <main className="relative z-10">
+        <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

@@ -1,26 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SocialIcon } from 'react-social-icons';
-import { Mail, MapPin, Phone, Send, Heart } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const ContactSection = ({ sectionRef }) => {
   const contactInfo = [
     {
-      icon: Mail,
+      icon: 'mail',
       title: "Email",
       content: "info@djlow323.com",
       href: "mailto:info@djlow323.com",
       gradient: "from-orange-400/20 to-amber-400/20"
     },
     {
-      icon: MapPin,
+      icon: 'mapPin',
       title: "Location",
       content: "Las Vegas, Nevada, United States",
       gradient: "from-blue-400/20 to-cyan-400/20"
     },
     {
-      icon: Phone,
+      icon: 'phone',
       title: "Ready to Book?",
       content: "Get your quote today",
       gradient: "from-violet-400/20 to-purple-400/20"
@@ -65,7 +64,7 @@ const ContactSection = ({ sectionRef }) => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                <Send className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                <DynamicIcon name="send" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">GET IN TOUCH</span>
               </div>
             </div>
@@ -128,7 +127,7 @@ const ContactSection = ({ sectionRef }) => {
                       <div className="relative group/icon">
                         <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} rounded-lg sm:rounded-xl blur-md group-hover/icon:blur-lg transition-all duration-300`}></div>
                         <div className="relative w-12 h-12 sm:w-16 sm:h-16 bg-white/[0.08] backdrop-blur-md rounded-lg sm:rounded-xl border border-white/20 flex items-center justify-center group-hover/icon:scale-110 transition-all duration-300">
-                          <info.icon className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400" />
+                          <DynamicIcon name={info.icon} className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400" />
                         </div>
                       </div>
                       

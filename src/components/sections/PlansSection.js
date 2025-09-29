@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Music, Clock, Star, Zap, Crown, Sparkles, Check, ArrowRight } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const PlansSection = ({ sectionRef }) => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const PlansSection = ({ sectionRef }) => {
     name: "ESSENTIAL",
     subtitle: "Perfect for intimate gatherings",
     duration: "3 Hours",
-    icon: Music,
+    icon: 'music',
     gradient: "from-blue-400/20 to-cyan-400/20",
     borderColor: "border-blue-400/30",
     hoverGradient: "from-blue-400/10 to-cyan-400/10",
@@ -28,7 +28,7 @@ const PlansSection = ({ sectionRef }) => {
     name: "PREMIUM",
     subtitle: "Most popular choice",
     duration: "4 Hours",
-    icon: Star,
+    icon: 'star',
     gradient: "from-orange-400/20 to-amber-400/20",
     borderColor: "border-orange-400/30",
     hoverGradient: "from-orange-400/10 to-amber-400/10",
@@ -43,7 +43,7 @@ const PlansSection = ({ sectionRef }) => {
     name: "ELITE",
     subtitle: "Ultimate experience (Most popular for weddings & quinceañeras)",
     duration: "8 Hours",
-    icon: Crown,
+    icon: 'crown',
     gradient: "from-violet-400/20 to-purple-400/20",
     borderColor: "border-violet-400/30",
     hoverGradient: "from-violet-400/10 to-purple-400/10",
@@ -93,7 +93,7 @@ const PlansSection = ({ sectionRef }) => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                <DynamicIcon name="zap" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">PACKAGES</span>
               </div>
             </div>
@@ -144,7 +144,7 @@ const PlansSection = ({ sectionRef }) => {
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-amber-400/30 rounded-full blur-lg"></div>
                     <div className="relative inline-flex items-center gap-2 px-4 py-2 bg-white/[0.12] backdrop-blur-md rounded-full border border-orange-400/30 text-white text-sm font-bold">
-                      <Sparkles className="w-4 h-4 text-orange-400" />
+                      <DynamicIcon name="sparkles" className="w-4 h-4 text-orange-400" />
                       <span className="text-white/90">MOST POPULAR</span>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ const PlansSection = ({ sectionRef }) => {
                   {/* Header: Icon + Name + Subtitle + Duration */}
                   <div className="flex items-start mb-6 sm:mb-8 gap-4">
                     <div className={`relative inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-white/[0.08] backdrop-blur-md rounded-xl sm:rounded-2xl border ${pkg.borderColor} group-hover/icon:scale-110 transition-all duration-300`}>
-                      <pkg.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                      <DynamicIcon name={pkg.icon} className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                     </div>
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold text-white mb-1 group-hover:text-orange-400 transition-colors duration-300">{pkg.name}</h3>
@@ -184,7 +184,7 @@ const PlansSection = ({ sectionRef }) => {
                         <div className="relative flex-shrink-0">
                           <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-md opacity-0 group-hover/feature:opacity-100 transition-all duration-300"></div>
                           <div className="relative w-6 h-6 bg-white/[0.08] backdrop-blur-md rounded-full border border-orange-400/20 flex items-center justify-center">
-                            <Check className="w-3 h-3 text-orange-400" />
+                            <DynamicIcon name="check" className="w-3 h-3 text-orange-400" />
                           </div>
                         </div>
                         <span className="text-white/70 text-sm leading-relaxed font-light group-hover/feature:text-white/90 transition-colors duration-300">{feature}</span>
@@ -209,7 +209,7 @@ const PlansSection = ({ sectionRef }) => {
                       pkg.popular ? 'text-white' : 'text-white/90 hover:text-white'
                     }`}>
                       <span>Get Started</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      <DynamicIcon name="arrowRight" className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                     </div>
                     <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
@@ -232,7 +232,7 @@ const PlansSection = ({ sectionRef }) => {
           <div className="relative inline-block group">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
             <div className="relative flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white/[0.08] backdrop-blur-md rounded-full border border-white/20 hover:border-orange-400/30 transition-all duration-300">
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+              <DynamicIcon name="star" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
               <span className="text-sm sm:text-base text-white/80 font-light">All packages include professional consultation and custom music curation</span>
             </div>
           </div>

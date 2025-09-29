@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SocialIcon } from 'react-social-icons';
-import { Music, Radio, Users, Heart, MapPin, Award } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const AboutSection = ({ sectionRef }) => {
   const socialLinks = [
@@ -17,19 +16,19 @@ const AboutSection = ({ sectionRef }) => {
 
   const achievements = [
     {
-      icon: Radio,
+      icon: 'radio',
       title: "Official DJ",
       description: "98.1 FM FiestaMix Las Vegas",
       gradient: "from-orange-400/20 to-amber-400/20"
     },
     {
-      icon: Award,
+      icon: 'award',
       title: "Production Member",
       description: "Lo Maximo Production",
       gradient: "from-blue-400/20 to-cyan-400/20"
     },
     {
-      icon: Users,
+      icon: 'users',
       title: "Former DJ",
       description: "99.3 FM LatinoMix",
       gradient: "from-violet-400/20 to-purple-400/20"
@@ -78,7 +77,7 @@ const AboutSection = ({ sectionRef }) => {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
                   <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                    <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                    <DynamicIcon name="heart" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                     <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">GET TO KNOW ME</span>
                   </div>
                 </div>
@@ -138,7 +137,7 @@ const AboutSection = ({ sectionRef }) => {
                     <div className="relative group">
                       <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
                       <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-full border border-orange-400/30 hover:border-orange-400/50 transition-all duration-300">
-                        <MapPin className="w-4 h-4 text-orange-400" />
+                        <DynamicIcon name="mapPin" className="w-4 h-4 text-orange-400" />
                         <span className="text-orange-400 text-sm font-medium">Based in Las Vegas, Nevada</span>
                       </div>
                     </div>
@@ -157,7 +156,7 @@ const AboutSection = ({ sectionRef }) => {
                 className="text-white font-semibold text-lg sm:text-xl flex items-center gap-3"
               >
                 <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-400/20 rounded-lg flex items-center justify-center">
-                  <Music className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                  <DynamicIcon name="music" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 </div>
                 Connect With Me
               </motion.h3>
@@ -175,27 +174,16 @@ const AboutSection = ({ sectionRef }) => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-full blur-md opacity-0 group-hover:opacity-80 transition-all duration-300"></div>
                     <div className="relative bg-white/[0.08] backdrop-blur-md rounded-full border border-white/20 group-hover:border-orange-400/40 transition-all duration-300 p-1">
-                      {
-                        social.platform == 'mixcloud'? (
-                          <img  
-                            alt="mixcloud--v2"
-                            style={{ height: 40, width: 40, cursor: "pointer" }}
-                            className="transition-all duration-300"
-                            onClick={() => window.open(social.url, "_blank")}
-                            src="data:image/png;base64,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"
-                          >
-                          </img>
-                        ) : (
-                          <SocialIcon
-                            url={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ height: 40, width: 40 }}
-                            bgColor="transparent"
-                            className="transition-all duration-300"
-                          />
-                        )
-                      }
+                      <DynamicIcon
+                        name={social.platform}
+                        url={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ height: 40, width: 40, cursor: 'pointer' }}
+                        bgColor="transparent"
+                        className="transition-all duration-300"
+                        onClick={() => social.platform !== 'mixcloud' ? null : window.open(social.url, "_blank")}
+                      />
                     </div>
                   </motion.div>
                 ))}
@@ -241,7 +229,7 @@ const AboutSection = ({ sectionRef }) => {
                       <div className="relative group/icon">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-amber-400 rounded-lg sm:rounded-xl blur-md group-hover/icon:blur-lg transition-all duration-300"></div>
                         <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-lg sm:rounded-xl flex items-center justify-center group-hover/icon:scale-110 transition-transform duration-300">
-                          <Music className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        <DynamicIcon name="music" className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
                       </div>
                       <div>

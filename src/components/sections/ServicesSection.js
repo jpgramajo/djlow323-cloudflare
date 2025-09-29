@@ -1,27 +1,27 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Music, Users, Star, Sparkles, Volume2, Mic, ArrowRight, Zap } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const ServicesSection = ({ sectionRef }) => {
   const services = [
     {
       title: "Wedding Celebrations",
-      icon: Star,
+      icon: 'star',
       description: "Crafting the perfect soundtrack for your most important day with curated music experiences.",
       features: ["Custom ceremony music", "Reception entertainment", "First dance coordination"],
       gradient: "from-rose-400/20 to-pink-400/20"
     },
     {
       title: "Corporate Events",
-      icon: Users,
+      icon: 'users',
       description: "Professional entertainment solutions for conferences, launches, and team celebrations.",
       features: ["Brand-aligned playlists", "Professional presentation", "Audience engagement"],
       gradient: "from-blue-400/20 to-cyan-400/20"
     },
     {
       title: "Private Experiences",
-      icon: Sparkles,
+      icon: 'sparkles',
       description: "Intimate celebrations designed around your personal style and musical preferences.",
       features: ["Personalized curation", "Intimate atmosphere", "Flexible arrangements"],
       gradient: "from-violet-400/20 to-purple-400/20"
@@ -29,10 +29,10 @@ const ServicesSection = ({ sectionRef }) => {
   ];
 
   const features = [
-    { icon: Volume2, text: "Professional Audio" },
-    { icon: Music, text: "Curated Libraries" },
-    { icon: Mic, text: "Live MC Services" },
-    { icon: Zap, text: "Dynamic Lighting" }
+    { icon: 'volume2', text: "Professional Audio" },
+    { icon: 'music', text: "Curated Libraries" },
+    { icon: 'mic', text: "Live MC Services" },
+    { icon: 'zap', text: "Dynamic Lighting" }
   ];
 
   return (
@@ -73,7 +73,7 @@ const ServicesSection = ({ sectionRef }) => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                <Music className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                <DynamicIcon name="music" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">PREMIUM SERVICES</span>
               </div>
             </div>
@@ -132,7 +132,7 @@ const ServicesSection = ({ sectionRef }) => {
                     {/* Floating Glass Elements */}
                     <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-full sm:rounded-2xl border border-white/20 flex items-center justify-center">
-                        <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        <DynamicIcon name="volume2" className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ const ServicesSection = ({ sectionRef }) => {
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 to-amber-400/10 rounded-lg sm:rounded-xl blur-md opacity-0 group-hover/feature:opacity-100 transition-all duration-300"></div>
                         <div className="relative flex items-center gap-3 p-3 sm:p-4 bg-white/[0.06] backdrop-blur-md rounded-lg sm:rounded-xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
                           <div className="w-7 h-7 sm:w-8 sm:h-8 bg-orange-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <feature.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
+                            <DynamicIcon name={feature.icon} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
                           </div>
                           <span className="text-sm font-medium text-white/90">{feature.text}</span>
                         </div>
@@ -225,7 +225,7 @@ const ServicesSection = ({ sectionRef }) => {
                         <div className="relative">
                           <div className="absolute inset-0 bg-white/20 rounded-lg sm:rounded-xl blur-md"></div>
                           <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white/[0.15] backdrop-blur-md rounded-lg sm:rounded-xl border border-white/20 flex items-center justify-center">
-                            <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                            <DynamicIcon name={service.icon} className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                           </div>
                         </div>
                       </div>

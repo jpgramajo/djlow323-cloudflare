@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Music, ExternalLink } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const Footer = ({ scrollToSection, menuItems }) => {
   const currentYear = new Date().getFullYear();
@@ -48,11 +48,11 @@ const Footer = ({ scrollToSection, menuItems }) => {
                     DJLOW323
                   </h3>
                   <div className="flex items-center justify-center md:justify-start gap-2 text-white/60">
-                    <Music className="w-4 h-4 text-orange-400" />
+                    <DynamicIcon name="music" className="w-4 h-4 text-orange-400" />
                     <span className="text-sm font-light">Professional DJ</span>
                   </div>
                   <div className="flex items-center justify-center md:justify-start gap-2 text-white/60">
-                    <MapPin className="w-4 h-4 text-orange-400" />
+                    <DynamicIcon name="mapPin" className="w-4 h-4 text-orange-400" />
                     <span className="text-sm font-light">Las Vegas, Nevada</span>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ const Footer = ({ scrollToSection, menuItems }) => {
                       >
                         <div className="absolute inset-0 bg-orange-400/10 rounded-lg blur-md opacity-0 group-hover/link:opacity-100 transition-all duration-300"></div>
                         <div className="relative flex items-center gap-2 px-3 py-2 text-white/70 hover:text-orange-400 transition-colors duration-300">
-                          <ExternalLink className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
+                          <DynamicIcon name="externalLink" className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
                           <span className="text-sm font-light">{item}</span>
                         </div>
                       </motion.button>
@@ -109,7 +109,7 @@ const Footer = ({ scrollToSection, menuItems }) => {
                     <div className="absolute inset-0 bg-orange-400/10 rounded-xl blur-md opacity-0 group-hover/contact:opacity-100 transition-all duration-300"></div>
                     <div className="relative flex items-center justify-center md:justify-start gap-3 p-3 bg-white/[0.04] backdrop-blur-md rounded-xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
                       <div className="w-8 h-8 bg-orange-400/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Mail className="w-4 h-4 text-orange-400" />
+                        <DynamicIcon name="mail" className="w-4 h-4 text-orange-400" />
                       </div>
                       <div className="text-left">
                         <a 

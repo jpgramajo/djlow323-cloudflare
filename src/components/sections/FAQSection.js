@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { HelpCircle, MessageCircle } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const FAQSection = ({ sectionRef }) => {
   const faqData = [
@@ -65,7 +65,7 @@ const FAQSection = ({ sectionRef }) => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                <DynamicIcon name="helpCircle" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">FREQUENTLY ASKED</span>
               </div>
             </div>
@@ -120,7 +120,7 @@ const FAQSection = ({ sectionRef }) => {
                       <div className="relative group/icon">
                         <div className={`absolute inset-0 bg-gradient-to-br ${faq.gradient} rounded-lg sm:rounded-xl blur-md group-hover/icon:blur-lg transition-all duration-300`}></div>
                         <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white/[0.08] backdrop-blur-md rounded-lg sm:rounded-xl border border-white/20 flex items-center justify-center group-hover/icon:scale-110 transition-all duration-300">
-                          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
+                          <DynamicIcon name="messageCircle" className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
                         </div>
                       </div>
                     </div>

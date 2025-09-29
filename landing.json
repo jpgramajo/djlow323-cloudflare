@@ -1,0 +1,171 @@
+{
+    "home": {
+        "banner_image": ""
+    },
+    "services": {
+        "main_tile": {
+            "icon": "",
+            "text": "premium services"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "main_card": {
+            "image": "",
+            "tile": "",
+            "base_title": "",
+            "accent_title": "",
+            "text": "",
+            "tiles": [
+                {
+                    "icon": "",
+                    "text": ""
+                }
+            ]
+        },
+        "secondary_cards": [
+            {
+                "icon": "",
+                "image": "",
+                "title": "",
+                "text": "",
+                "bullet_list": [
+                    "Custom Ceremony Music"
+                ]
+            }
+        ]
+    },
+    "plans": {
+        "main_tile": {
+            "icon": "",
+            "text": "packages"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "most_popular": false,
+        "plans": [
+            {
+                "icon": "",
+                "title": "",
+                "text": "",
+                "bullet_list": [
+                    "Custom Ceremony Music"
+                ]
+            }
+        ],
+        "bottom_tile": ""
+    },
+    "about": {
+        "main_tile": {
+            "icon": "",
+            "text": "get to know me"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "accent_text_keywords": [
+            "DJLOW",
+            "unique musical experiences"
+        ],
+        "text_tile": {
+            "icon": "",
+            "text": "Based in Las Vegas, Nevada"
+        },
+        "image": "",
+        "image_tile": {
+            "icon": "",
+            "title": "DJLOW",
+            "subtitle": "Professional DJ"
+        },
+        "socials_text": "Connect With Me",
+        "social_links": [
+            {
+                "icon": "",
+                "link": ""
+            }
+        ]
+    },
+    "gallery": {
+        "main_tile": {
+            "icon": "",
+            "text": "get to know me"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "sections": [
+            {
+                "title": "",
+                "main_image": "",
+                "images": [
+                    ""
+                ]
+            }
+        ]
+    },
+    "mixes": {
+        "main_tile": {
+            "icon": "",
+            "text": "premium services"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "player": {
+            "title": "",
+            "subtitle": "",
+            "button_text": "Visit Mixcloud",
+            "button_link": "",
+            "player_link": ""
+        }
+    },
+    "FAQ": {
+        "main_tile": {
+            "icon": "",
+            "text": "premium services"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "items": [
+            {
+                "question": "",
+                "answer": ""
+            }
+        ]
+    },
+    "contact": {
+        "main_tile": {
+            "icon": "",
+            "text": "premium services"
+        },
+        "base_title": "",
+        "accent_title": "",
+        "text": "",
+        "items": [
+            {
+                "icon": "",
+                "title": "",
+                "text": ""
+            }
+        ]
+    },
+    "footer": {
+        "title": "DJLOW323",
+        "left_items": [
+            {
+                "icon": "",
+                "text": "Professional DJ"
+            },
+            {
+                "icon": "",
+                "text": "Las Vegas, Nevada"
+            }
+        ],
+        "contact": {
+            "email": "",
+            "text": "For Bookings & Events"
+        }
+    }
+}

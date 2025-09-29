@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Music, Play, Headphones, ExternalLink } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
 
 const MixcloudSection = ({ sectionRef }) => {
   return (
@@ -42,7 +42,7 @@ const MixcloudSection = ({ sectionRef }) => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-white/[0.08] backdrop-blur-md rounded-2xl border border-white/10 hover:border-orange-400/30 transition-all duration-300">
-                <Headphones className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
+                <DynamicIcon name="headphones" className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 <span className="text-xs sm:text-sm font-semibold text-white/90 tracking-wider">MIXES</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ const MixcloudSection = ({ sectionRef }) => {
                     <div className="relative group/icon">
                       <div className="absolute inset-0 bg-gradient-to-br from-orange-400/30 to-amber-400/30 rounded-xl blur-lg group-hover/icon:blur-xl transition-all duration-300"></div>
                       <div className="relative w-12 h-12 sm:w-14 sm:h-14 bg-white/[0.1] backdrop-blur-md rounded-xl border border-orange-400/30 flex items-center justify-center group-hover/icon:scale-110 transition-transform duration-300">
-                        <Play className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 ml-1" />
+                        <DynamicIcon name="play" className="w-6 h-6 sm:w-7 sm:h-7 text-orange-400 ml-1" />
                       </div>
                     </div>
                     <div>
@@ -114,7 +114,7 @@ const MixcloudSection = ({ sectionRef }) => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-amber-400/20 blur-md"></div>
                     <div className="relative flex items-center gap-2 px-6 py-3 bg-white/[0.08] backdrop-blur-md rounded-xl border border-white/20 hover:border-orange-400/40 transition-all duration-300">
-                      <ExternalLink className="w-4 h-4 text-orange-400" />
+                      <DynamicIcon name="externalLink" className="w-4 h-4 text-orange-400" />
                       <span className="text-white/90 text-sm font-medium">Visit Mixcloud</span>
                     </div>
                   </motion.a>
