@@ -4,99 +4,190 @@
     },
     "services": {
         "main_tile": {
-            "icon": "",
+            "icon": "music",
             "text": "premium services"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Professional",
+        "accent_title": "DJ Services",
+        "text": "Elevating events with meticulously crafted musical experiences and cutting-edge entertainment solutions.",
         "main_card": {
             "image": "",
-            "tile": "",
-            "base_title": "",
-            "accent_title": "",
-            "text": "",
+            "tile": "STATE-OF-THE-ART",
+            "base_title": "Immersive",
+            "accent_title": "Audio Experience",
+            "text": "Professional-grade equipment and years of expertise combine to deliver flawless audio experiences that transform every moment of your event into something extraordinary.",
             "tiles": [
                 {
-                    "icon": "",
-                    "text": ""
+                    "icon": "volume2",
+                    "text": "Professional Audio"
+                },
+                {
+                    "icon": "music",
+                    "text": "Curated Libraries"
+                },
+                {
+                    "icon": "mic",
+                    "text": "Live MC Services"
+                },
+                {
+                    "icon": "zap",
+                    "text": "Dynamic Lighting"
                 }
             ]
         },
         "secondary_cards": [
             {
-                "icon": "",
+                "icon": "star",
                 "image": "",
-                "title": "",
-                "text": "",
+                "title": "Wedding Celebrations",
+                "text": "Crafting the perfect soundtrack for your most important day with curated music experiences.",
                 "bullet_list": [
-                    "Custom Ceremony Music"
+                    "Custom ceremony music",
+                    "Reception entertainment",
+                    "First dance coordination"
+                ]
+            },
+            {
+                "icon": "users",
+                "image": "",
+                "title": "Corporate Events",
+                "text": "Professional entertainment solutions for conferences, launches, and team celebrations.",
+                "bullet_list": [
+                    "Brand-aligned playlists",
+                    "Professional presentation",
+                    "Audience engagement"
+                ]
+            },
+            {
+                "icon": "sparkles",
+                "image": "",
+                "title": "Private Experiences",
+                "text": "Intimate celebrations designed around your personal style and musical preferences.",
+                "bullet_list": [
+                    "Personalized curation",
+                    "Intimate atmosphere",
+                    "Flexible arrangements"
                 ]
             }
         ]
     },
     "plans": {
         "main_tile": {
-            "icon": "",
+            "icon": "zap",
             "text": "packages"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
-        "most_popular": false,
+        "base_title": "Choose Your",
+        "accent_title": "Experience",
+        "text": "Tailored packages designed to match your event's unique needs and create unforgettable moments.",
         "plans": [
             {
-                "icon": "",
-                "title": "",
-                "text": "",
+                "icon": "music",
+                "title": "ESSENTIAL",
+                "text": "Perfect for intimate gatherings",
+                "popular": false,
                 "bullet_list": [
-                    "Custom Ceremony Music"
+                    "Professional DJ Setup",
+                    "Curated Music Library",
+                    "Basic Ambient Lighting",
+                    "Microphone for Announcements",
+                    "Complete Setup & Breakdown"
+                ]
+            },
+            {
+                "icon": "star",
+                "title": "PREMIUM",
+                "text": "Most popular choice",
+                "popular": false,
+                "bullet_list": [
+                    "Everything in Essential",
+                    "Basic Lighting (12 Uplights)",
+                    "Live Music Requests",
+                    "2 Dozen Party Favors"
+                ]
+            },
+            {
+                "icon": "crown",
+                "title": "ELITE",
+                "text": "Ultimate experience (Most popular for weddings & quinceañeras)",
+                "popular": true,
+                "bullet_list": [
+                    "Everything in Premium",
+                    "Advanced Lighting (20 Uplights)",
+                    "Live Mixing Performance",
+                    "Professional MC Services",
+                    "Timeline Coordination",
+                    "Social Media Integration",
+                    "4 Dozen Party Favors"
                 ]
             }
         ],
-        "bottom_tile": ""
+        "bottom_tile": "All packages include professional consultation and custom music curation"
     },
     "about": {
         "main_tile": {
-            "icon": "",
+            "icon": "heart",
             "text": "get to know me"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Meet",
+        "accent_title": "DJLOW",
+        "text": "I'm DJLOW, a professional DJ based in Las Vegas, Nevada. With experience in the music industry since 2003, I've worked on a wide range of events, from radio promotions to large-scale celebrations, and across all music genres. My passion is creating unique musical experiences that make every event unforgettable. From intimate weddings to large corporate celebrations, my goal is to get everyone dancing.",
         "accent_text_keywords": [
             "DJLOW",
             "unique musical experiences"
         ],
         "text_tile": {
-            "icon": "",
+            "icon": "mapPin",
             "text": "Based in Las Vegas, Nevada"
         },
         "image": "",
         "image_tile": {
-            "icon": "",
+            "icon": "music",
             "title": "DJLOW",
             "subtitle": "Professional DJ"
         },
         "socials_text": "Connect With Me",
         "social_links": [
             {
-                "icon": "",
-                "link": ""
+                "icon": "tiktok",
+                "link": "https://www.tiktok.com/@djlow323"
+            },
+            {
+                "icon": "spotify",
+                "link": "https://open.spotify.com/user/djlow323"
+            },
+            {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/DjLow.LasVegas"
+            },
+            {
+                "icon": "twitter",
+                "link": "https://x.com/DJLOW323"
+            },
+            {
+                "icon": "instagram",
+                "link": "https://www.instagram.com/djlow323"
+            },
+            {
+                "icon": "youtube",
+                "link": "https://www.youtube.com/@DjLowMixes"
+            },
+            {
+                "icon": "mixcloud",
+                "link": "https://www.mixcloud.com/djlow323/"
             }
         ]
     },
     "gallery": {
         "main_tile": {
-            "icon": "",
+            "icon": "award",
             "text": "get to know me"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Event",
+        "accent_title": "Gallery",
+        "text": "A glimpse into the unforgettable moments and vibrant energy of past events.",
         "sections": [
             {
-                "title": "",
+                "title": "Weddings",
                 "main_image": "",
                 "images": [
                     ""
@@ -106,48 +197,70 @@
     },
     "mixes": {
         "main_tile": {
-            "icon": "",
-            "text": "premium services"
+            "icon": "headphones",
+            "text": "MIXES"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Latest",
+        "accent_title": "Mixes",
+        "text": "Discover my latest sets, live performances, and exclusive mixes. Experience the energy and passion that defines every performance.",
         "player": {
-            "title": "",
-            "subtitle": "",
+            "title": "Mixcloud Player",
+            "subtitle": "DJLOW323 Official Channel",
             "button_text": "Visit Mixcloud",
-            "button_link": "",
-            "player_link": ""
+            "button_link": "https://www.mixcloud.com/djlow323/",
+            "player_link": "https://www.mixcloud.com/widget/iframe/?feed=%2Fdjlow323%2F"
         }
     },
     "FAQ": {
         "main_tile": {
-            "icon": "",
-            "text": "premium services"
+            "icon": "helpCircle",
+            "text": "FREQUENTLY ASKED"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Questions",
+        "accent_title": "& Answers",
+        "text": "Everything you need to know about booking professional DJ services for your special event.",
         "items": [
             {
-                "question": "",
-                "answer": ""
+                "question": "What type of events do you cover?",
+                "answer": "I cover all types of events: weddings, birthdays, quinceañeras, corporate events, private parties and more."
+            },
+            {
+                "question": "Do you bring your own equipment?",
+                "answer": "Yes, I bring all the necessary professional equipment: DJ console, sound system, microphones, LED lights and special effects depending on the package selected."
+            },
+            {
+                "question": "Can I request specific music?",
+                "answer": "Absolutely! We work together to create the perfect playlist. You can send me your favorite song list and I'll make sure to include them in your event."
+            },
+            {
+                "question": "What areas do you cover in Las Vegas?",
+                "answer": "I cover the entire Las Vegas metropolitan area, Nevada, including Henderson, Summerlin, North Las Vegas and surrounding areas."
             }
         ]
     },
     "contact": {
         "main_tile": {
-            "icon": "",
-            "text": "premium services"
+            "icon": "send",
+            "text": "GET IN TOUCH"
         },
-        "base_title": "",
-        "accent_title": "",
-        "text": "",
+        "base_title": "Let's Create",
+        "accent_title": "Something Amazing",
+        "text": "Ready to make your event unforgettable? Let's discuss your vision and create the perfect musical experience together.",
         "items": [
             {
-                "icon": "",
-                "title": "",
-                "text": ""
+                "icon": "mail",
+                "title": "Email",
+                "text": "info@djlow323.com"
+            },
+            {
+                "icon": "mapPin",
+                "title": "Location",
+                "text": "Las Vegas, Nevada, United States"
+            },
+            {
+                "icon": "phone",
+                "title": "Ready to Book?",
+                "text": "Get your quote today"
             }
         ]
     },
@@ -155,16 +268,16 @@
         "title": "DJLOW323",
         "left_items": [
             {
-                "icon": "",
+                "icon": "music",
                 "text": "Professional DJ"
             },
             {
-                "icon": "",
+                "icon": "mapPin",
                 "text": "Las Vegas, Nevada"
             }
         ],
         "contact": {
-            "email": "",
+            "email": "info@djlow323.com",
             "text": "For Bookings & Events"
         }
     }
